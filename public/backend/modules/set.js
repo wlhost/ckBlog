@@ -1,4 +1,5 @@
-/** ckAdmin **/ ;
+/** ckAdmin **/
+;
 layui.define(["form", "upload"], function (t) {
     var i = layui.$,
         e = layui.layer,

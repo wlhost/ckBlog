@@ -22,7 +22,6 @@ class AdminController extends Controller
         return view('backend.page.console');
     }
 
-
     public function adminList()
     {
         return view('backend.page.adminlist');

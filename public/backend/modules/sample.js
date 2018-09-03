@@ -1,13 +1,13 @@
 /** ckAdmin **/
-;layui.define(function(e) {
+;layui.define(function (e) {
     var a = layui.admin;
-    layui.use(["admin", "carousel"], function() {
+    layui.use(["admin", "carousel"], function () {
         var e = layui.$
             , a = (layui.admin,
             layui.carousel)
             , l = layui.element
             , t = layui.device();
-        e(".layadmin-carousel").each(function() {
+        e(".layadmin-carousel").each(function () {
             var l = e(this);
             a.render({
                 elem: this,
@@ -21,7 +21,7 @@
         }),
             l.render("progress")
     }),
-        layui.use(["carousel", "echarts"], function() {
+        layui.use(["carousel", "echarts"], function () {
             var e = layui.$
                 , a = (layui.carousel,
                 layui.echarts)
@@ -82,14 +82,14 @@
                 }]
             }]
                 , i = e("#LAY-index-pageone").children("div")
-                , n = function(e) {
+                , n = function (e) {
                 l[e] = a.init(i[e], layui.echartsTheme),
                     l[e].setOption(t[e]),
                     window.onresize = l[e].resize
             };
             i[0] && n(0)
         }),
-        layui.use(["carousel", "echarts"], function() {
+        layui.use(["carousel", "echarts"], function () {
             var e = layui.$
                 , a = (layui.carousel,
                 layui.echarts)
@@ -135,14 +135,14 @@
                 }]
             }]
                 , i = e("#LAY-index-pagetwo").children("div")
-                , n = function(e) {
+                , n = function (e) {
                 l[e] = a.init(i[e], layui.echartsTheme),
                     l[e].setOption(t[e]),
                     window.onresize = l[e].resize
             };
             i[0] && n(0)
         }),
-        layui.use(["carousel", "echarts"], function() {
+        layui.use(["carousel", "echarts"], function () {
             var e = layui.$
                 , a = (layui.carousel,
                 layui.echarts)
@@ -276,14 +276,14 @@
                 }]
             }]
                 , i = e("#LAY-index-pagethree").children("div")
-                , n = function(e) {
+                , n = function (e) {
                 l[e] = a.init(i[e], layui.echartsTheme),
                     l[e].setOption(t[e]),
                     window.onresize = l[e].resize
             };
             i[0] && n(0)
         }),
-        layui.use("table", function() {
+        layui.use("table", function () {
             var e = (layui.$,
                 layui.table);
             e.render({
@@ -301,19 +301,19 @@
                 }, {
                     field: "complete",
                     title: "完成情况",
-                    templet: function(e) {
+                    templet: function (e) {
                         return "已完成" == e.complete ? '<del style="color: #5FB878;">' + e.complete + "</del>" : "进行中" == e.complete ? '<span style="color: #FFB800;">' + e.complete + "</span>" : '<span style="color: #FF5722;">' + e.complete + "</span>"
                     }
                 }]],
                 skin: "line"
             })
         }),
-        a.events.replyNote = function(e) {
+        a.events.replyNote = function (e) {
             var a = e.data("id");
             layer.prompt({
                 title: "回复留言 ID:" + a,
                 formType: 2
-            }, function(e, a) {
+            }, function (e, a) {
                 layer.msg("得到：" + e),
                     layer.close(a)
             })

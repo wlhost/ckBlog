@@ -1,4 +1,5 @@
-/** ckAdmin **/ ;
+/** ckAdmin **/
+;
 layui.define(["table", "form", "element"], function (e) {
     var t = layui.$,
         i = layui.table,
@@ -75,7 +76,8 @@ layui.define(["table", "form", "element"], function (e) {
                         i.reload("LAY-user-front-submit"), layer.close(e)
                     }), o.trigger("click")
                 },
-                success: function (e, t) {}
+                success: function (e, t) {
+                }
             })
         }
     }), e("workorder", {})

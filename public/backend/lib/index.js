@@ -5,16 +5,16 @@ layui.extend({
     admin: "lib/admin",
     view: "lib/view"
 }).define(["setter", "admin"],
-    function(a) {
+    function (a) {
         var e = layui.setter,
             i = layui.element,
             n = layui.admin,
             t = n.tabsPage,
             d = layui.view,
-            l = function(a, d) {
+            l = function (a, d) {
                 var l, b = r("#LAY_app_tabsheader>li"),
                     y = a.replace(/(^http(s*):)|(\?[\s\S]*$)/g, "");
-                if (b.each(function(e) {
+                if (b.each(function (e) {
                     var i = r(this),
                         n = i.attr("lay-id");
                     n === a && (l = !0, t.index = e)
@@ -42,7 +42,7 @@ layui.extend({
                 base: e.base + "modules/"
             }),
             layui.each(e.extend,
-                function(a, i) {
+                function (a, i) {
                     var n = {};
                     n[i] = "{/}" + e.base + "lib/extend/" + i,
                         layui.extend(n)

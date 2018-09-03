@@ -27,3 +27,13 @@ Route::namespace('Admin')->prefix('/admin')->group(function (){
 
     Route::get('/article','ArticleController@index');  // 文章管理页面
 });
+
+
+// auth
+Route::group(['namespace' => 'Auth', 'prefix' => 'auth'], function () {
+
+    // 后台登录
+    Route::group(['prefix' => 'admin'], function () {
+        Route::get('/', 'AdminController@login');
+    });
+});

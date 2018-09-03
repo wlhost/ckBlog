@@ -1,4 +1,5 @@
-/** ckAdmin **/ ;
+/** ckAdmin **/
+;
 layui.define(["table", "form"], function (e) {
     var t = layui.$,
         i = layui.table;
@@ -79,7 +80,8 @@ layui.define(["table", "form"], function (e) {
                         i.reload("LAY-user-front-submit"), layer.close(e)
                     }), n.trigger("click")
                 },
-                success: function (e, t) {}
+                success: function (e, t) {
+                }
             })
         }
     }), i.on("tool(LAY-user-back-manage)", function (e) {
@@ -109,7 +111,8 @@ layui.define(["table", "form"], function (e) {
                         i.reload("LAY-user-front-submit"), layer.close(e)
                     }), n.trigger("click")
                 },
-                success: function (e, t) {}
+                success: function (e, t) {
+                }
             })
         }
     }), i.render({
@@ -161,7 +164,8 @@ layui.define(["table", "form"], function (e) {
                         i.reload("LAY-user-back-role"), layer.close(e)
                     }), r.trigger("click")
                 },
-                success: function (e, t) {}
+                success: function (e, t) {
+                }
             })
         }
     }), e("useradmin", {})

@@ -14,11 +14,11 @@ html {
     color: #666
 }
 
-.layadmin-tabsbody-item,[template] {
+.layadmin-tabsbody-item, [template] {
     display: none
 }
 
-[lay-href],[lay-tips],[layadmin-event] {
+[lay-href], [lay-tips], [layadmin-event] {
     cursor: pointer
 }
 
@@ -40,7 +40,7 @@ html {
     z-index: 1001
 }
 
-.layui-layout-admin .layui-header .layui-nav .layui-nav-item,.layui-layout-admin .layui-logo {
+.layui-layout-admin .layui-header .layui-nav .layui-nav-item, .layui-layout-admin .layui-logo {
     height: 50px;
     line-height: 50px
 }
@@ -60,7 +60,7 @@ html {
     background-position: center center
 }
 
-.layadmin-pagetabs,.layui-layout-admin .layui-body,.layui-layout-admin .layui-footer,.layui-layout-admin .layui-layout-left {
+.layadmin-pagetabs, .layui-layout-admin .layui-body, .layui-layout-admin .layui-footer, .layui-layout-admin .layui-layout-left {
     left: 220px
 }
 
@@ -103,11 +103,11 @@ html {
     right: 0
 }
 
-.layui-layout-admin .layui-header .layui-nav .layui-nav-child dd.layui-this,.layui-layout-admin .layui-header .layui-nav .layui-nav-child dd.layui-this a {
+.layui-layout-admin .layui-header .layui-nav .layui-nav-child dd.layui-this, .layui-layout-admin .layui-header .layui-nav .layui-nav-child dd.layui-this a {
     background: 0 0
 }
 
-.layadmin-pagetabs,.layui-layout-admin .layui-body,.layui-layout-admin .layui-footer,.layui-layout-admin .layui-header .layui-layout-right,.layui-layout-admin .layui-header .layui-nav .layui-nav-item,.layui-layout-admin .layui-layout-left,.layui-layout-admin .layui-logo,.layui-layout-admin .layui-side {
+.layadmin-pagetabs, .layui-layout-admin .layui-body, .layui-layout-admin .layui-footer, .layui-layout-admin .layui-header .layui-layout-right, .layui-layout-admin .layui-header .layui-nav .layui-nav-item, .layui-layout-admin .layui-layout-left, .layui-layout-admin .layui-logo, .layui-layout-admin .layui-side {
     transition: all .3s;
     -webkit-transition: all .3s
 }
@@ -134,10 +134,10 @@ html {
 
 @media screen and (max-width: 450px) {
     .layui-form[wid100] .layui-form-item .layui-input-inline {
-        margin-left:132px
+        margin-left: 132px
     }
 
-    .layui-form[wid100] .layui-form-item .layui-input-inline+.layui-form-mid {
+    .layui-form[wid100] .layui-form-item .layui-input-inline + .layui-form-mid {
         margin-left: 130px
     }
 }
@@ -169,7 +169,7 @@ html {
 }
 
 .layadmin-link {
-    color: #029789!important
+    color: #029789 !important
 }
 
 .layadmin-link:hover {
@@ -204,9 +204,9 @@ html {
 }
 
 .layui-layer-adminRight {
-    top: 50px!important;
+    top: 50px !important;
     bottom: 0;
-    box-shadow: 1px 1px 10px rgba(0,0,0,.1);
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, .1);
     border-radius: 0;
     overflow: auto
 }
@@ -245,7 +245,7 @@ html {
     cursor: text
 }
 
-.layui-layout-admin .layui-layout-left a,.layui-layout-admin .layui-layout-right {
+.layui-layout-admin .layui-layout-left a, .layui-layout-admin .layui-layout-right {
     padding: 0
 }
 
@@ -259,12 +259,12 @@ html {
     margin-left: 11px
 }
 
-.layui-header .layui-nav .layui-this:after,.layui-layout-admin .layui-header .layui-nav-bar {
-    top: 0!important;
+.layui-header .layui-nav .layui-this:after, .layui-layout-admin .layui-header .layui-nav-bar {
+    top: 0 !important;
     bottom: auto;
     height: 3px;
     background-color: #fff;
-    background-color: rgba(255,255,255,.3)
+    background-color: rgba(255, 255, 255, .3)
 }
 
 .layadmin-body-shade {
@@ -274,7 +274,7 @@ html {
     right: 0;
     top: 0;
     bottom: 0;
-    background-color: rgba(0,0,0,.3);
+    background-color: rgba(0, 0, 0, .3);
     z-index: 1000
 }
 
@@ -295,7 +295,7 @@ html {
     padding-right: 30px
 }
 
-.layui-side-menu .layui-nav .layui-nav-item>a {
+.layui-side-menu .layui-nav .layui-nav-item > a {
     padding-top: 8px;
     padding-bottom: 8px
 }
@@ -304,7 +304,7 @@ html {
     background: 0 0
 }
 
-.layui-side-menu .layui-nav .layui-nav-itemed>.layui-nav-child {
+.layui-side-menu .layui-nav .layui-nav-itemed > .layui-nav-child {
     padding: 5px 0
 }
 
@@ -316,7 +316,7 @@ html {
 }
 
 .layui-side-menu .layui-nav .layui-nav-child .layui-nav-child {
-    background: 0 0!important
+    background: 0 0 !important
 }
 
 .layui-side-menu .layui-nav .layui-nav-child .layui-nav-child a {
@@ -329,12 +329,12 @@ html {
 
 @media screen and (max-width: 992px) {
     .layui-layout-admin .layui-side {
-        transform:translate3d(-220px,0,0);
-        -webkit-transform: translate3d(-220px,0,0);
+        transform: translate3d(-220px, 0, 0);
+        -webkit-transform: translate3d(-220px, 0, 0);
         width: 220px
     }
 
-    .layadmin-pagetabs,.layui-layout-admin .layui-body,.layui-layout-admin .layui-footer,.layui-layout-admin .layui-layout-left {
+    .layadmin-pagetabs, .layui-layout-admin .layui-body, .layui-layout-admin .layui-footer, .layui-layout-admin .layui-layout-left {
         left: 0
     }
 }
@@ -353,7 +353,7 @@ html {
     width: 60px
 }
 
-.layadmin-side-shrink .layadmin-pagetabs,.layadmin-side-shrink .layui-layout-admin .layui-body,.layadmin-side-shrink .layui-layout-admin .layui-footer,.layadmin-side-shrink .layui-layout-admin .layui-layout-left {
+.layadmin-side-shrink .layadmin-pagetabs, .layadmin-side-shrink .layui-layout-admin .layui-body, .layadmin-side-shrink .layui-layout-admin .layui-footer, .layadmin-side-shrink .layui-layout-admin .layui-layout-left {
     left: 60px
 }
 
@@ -366,41 +366,41 @@ html {
     position: static
 }
 
-.layadmin-side-shrink .layui-side-menu .layui-nav-item>a {
+.layadmin-side-shrink .layui-side-menu .layui-nav-item > a {
     padding-right: 0
 }
 
-.layadmin-side-shrink .layui-side-menu .layui-nav-item cite,.layadmin-side-shrink .layui-side-menu .layui-nav>.layui-nav-item>.layui-nav-child,.layadmin-side-shrink .layui-side-menu .layui-nav>.layui-nav-item>a .layui-nav-more {
+.layadmin-side-shrink .layui-side-menu .layui-nav-item cite, .layadmin-side-shrink .layui-side-menu .layui-nav > .layui-nav-item > .layui-nav-child, .layadmin-side-shrink .layui-side-menu .layui-nav > .layui-nav-item > a .layui-nav-more {
     display: none;
     padding: 8px 0;
     width: 200px
 }
 
-.layadmin-side-shrink .layui-side-menu .layui-nav>.layui-nav-itemed>a {
-    background: rgba(0,0,0,.3)
+.layadmin-side-shrink .layui-side-menu .layui-nav > .layui-nav-itemed > a {
+    background: rgba(0, 0, 0, .3)
 }
 
-.layadmin-side-spread-sm .layadmin-pagetabs,.layadmin-side-spread-sm .layui-layout-admin .layui-body,.layadmin-side-spread-sm .layui-layout-admin .layui-footer,.layadmin-side-spread-sm .layui-layout-admin .layui-layout-left {
+.layadmin-side-spread-sm .layadmin-pagetabs, .layadmin-side-spread-sm .layui-layout-admin .layui-body, .layadmin-side-spread-sm .layui-layout-admin .layui-footer, .layadmin-side-spread-sm .layui-layout-admin .layui-layout-left {
     left: 0;
-    transform: translate3d(220px,0,0);
-    -webkit-transform: translate3d(220px,0,0)
+    transform: translate3d(220px, 0, 0);
+    -webkit-transform: translate3d(220px, 0, 0)
 }
 
 .layadmin-side-spread-sm .layui-layout-admin .layui-layout-right {
-    transform: translate3d(220px,0,0);
-    -webkit-transform: translate3d(220px,0,0)
+    transform: translate3d(220px, 0, 0);
+    -webkit-transform: translate3d(220px, 0, 0)
 }
 
 .layadmin-side-spread-sm .layui-side {
-    transform: translate3d(0,0,0);
-    -webkit-transform: translate3d(0,0,0)
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0)
 }
 
 .layadmin-side-spread-sm .layadmin-body-shade {
     display: block
 }
 
-.layadmin-pagetabs .layui-tab-title li:first-child .layui-tab-close,.layadmin-tabs-select.layui-nav .layui-nav-bar,.layadmin-tabs-select.layui-nav .layui-nav-more {
+.layadmin-pagetabs .layui-tab-title li:first-child .layui-tab-close, .layadmin-tabs-select.layui-nav .layui-nav-bar, .layadmin-tabs-select.layui-nav .layui-nav-more {
     display: none
 }
 
@@ -410,7 +410,7 @@ html {
     padding: 0 80px 0 40px;
     background-color: #fff;
     box-sizing: border-box;
-    box-shadow: 0 1px 2px 0 rgba(0,0,0,.1)
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .1)
 }
 
 .layadmin-pagetabs .layadmin-tabs-control {
@@ -458,7 +458,7 @@ html {
     line-height: 40px
 }
 
-.layadmin-tabs-select.layui-nav .layui-nav-item>a {
+.layadmin-tabs-select.layui-nav .layui-nav-item > a {
     height: 40px
 }
 
@@ -472,8 +472,8 @@ html {
     right: 0
 }
 
-.layadmin-tabs-select.layui-nav .layui-nav-child dd.layui-this,.layadmin-tabs-select.layui-nav .layui-nav-child dd.layui-this a {
-    background-color: #f2f2f2!important;
+.layadmin-tabs-select.layui-nav .layui-nav-child dd.layui-this, .layadmin-tabs-select.layui-nav .layui-nav-child dd.layui-this a {
+    background-color: #f2f2f2 !important;
     color: #333
 }
 
@@ -531,7 +531,7 @@ html {
     width: 100%
 }
 
-.layadmin-pagetabs .layui-tab-title li.layui-this,.layadmin-pagetabs .layui-tab-title li:hover {
+.layadmin-pagetabs .layui-tab-title li.layui-this, .layadmin-pagetabs .layui-tab-title li:hover {
     background-color: #f6f6f6
 }
 
@@ -544,7 +544,7 @@ html {
 
 .layadmin-tabspage-none .layui-layout-admin .layui-header {
     border-bottom: none;
-    box-shadow: 0 1px 2px 0 rgba(0,0,0,.05)
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .05)
 }
 
 .layadmin-tabspage-none .layui-layout-admin .layui-body {
@@ -565,7 +565,7 @@ html {
     background-color: #fff
 }
 
-.layui-layout-admin .layui-header a,.layui-layout-admin .layui-header a cite {
+.layui-layout-admin .layui-header a, .layui-layout-admin .layui-header a cite {
     color: #333
 }
 
@@ -581,37 +581,37 @@ html {
     border-color: transparent transparent #666
 }
 
-.layui-layout-admin .layui-header .layui-nav .layui-this:after,.layui-layout-admin .layui-header .layui-nav-bar {
+.layui-layout-admin .layui-header .layui-nav .layui-this:after, .layui-layout-admin .layui-header .layui-nav-bar {
     height: 2px;
     background-color: #20222A
 }
 
 .layui-layout-admin .layui-logo {
     background-color: #20222A;
-    box-shadow: 0 1px 2px 0 rgba(0,0,0,.15)
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .15)
 }
 
-.layui-layout-admin .layui-logo,.layui-layout-admin .layui-logo a {
+.layui-layout-admin .layui-logo, .layui-layout-admin .layui-logo a {
     color: #fff;
-    color: rgba(255,255,255,.8)
+    color: rgba(255, 255, 255, .8)
 }
 
 .layui-side-menu {
-    box-shadow: 1px 0 2px 0 rgba(0,0,0,.05)
+    box-shadow: 1px 0 2px 0 rgba(0, 0, 0, .05)
 }
 
 .layui-layout-admin .layui-footer {
     padding: 10px 0;
     text-align: center;
-    box-shadow: 0 -1px 2px 0 rgba(0,0,0,.05)
+    box-shadow: 0 -1px 2px 0 rgba(0, 0, 0, .05)
 }
 
-.layadmin-setTheme-side,.layui-side-menu {
+.layadmin-setTheme-side, .layui-side-menu {
     background-color: #20222A;
     color: #fff
 }
 
-.layadmin-setTheme-header,.layui-layout-admin .layui-footer {
+.layadmin-setTheme-header, .layui-layout-admin .layui-footer {
     background-color: #fff
 }
 
@@ -659,7 +659,7 @@ html {
 }
 
 .layadmin-carousel {
-    height: 185px!important;
+    height: 185px !important;
     background-color: #fff
 }
 
@@ -675,7 +675,7 @@ html {
     background-color: #999
 }
 
-.layadmin-carousel .layui-carousel,.layadmin-carousel>[carousel-item]>* {
+.layadmin-carousel .layui-carousel, .layadmin-carousel > [carousel-item] > * {
     background-color: #fff
 }
 
@@ -781,14 +781,14 @@ html {
 }
 
 .layadmin-dataview {
-    height: 332px!important
+    height: 332px !important
 }
 
-.layadmin-dataview>[carousel-item]:before {
+.layadmin-dataview > [carousel-item]:before {
     display: none
 }
 
-.layadmin-dataview>[carousel-item]>div {
+.layadmin-dataview > [carousel-item] > div {
     height: 332px
 }
 
@@ -823,7 +823,7 @@ html {
 }
 
 .layadmin-news {
-    height: 60px!important;
+    height: 60px !important;
     padding: 5px 0
 }
 
@@ -929,12 +929,12 @@ html {
     right: 0
 }
 
-.layuiadmin-badge,.layuiadmin-btn-group,.layuiadmin-span-color {
+.layuiadmin-badge, .layuiadmin-btn-group, .layuiadmin-span-color {
     position: absolute;
     right: 15px
 }
 
-.layuiadmin-card-link a:hover,.layuiadmin-card-team li a:hover,.layuiadmin-card-text a:hover {
+.layuiadmin-card-link a:hover, .layuiadmin-card-team li a:hover, .layuiadmin-card-text a:hover {
     color: #01AAED;
     transition: all .3s
 }
@@ -954,7 +954,7 @@ html {
     border: none
 }
 
-.layuiadmin-card-status dd div.layui-status-img,.layuiadmin-card-team .layui-team-img {
+.layuiadmin-card-status dd div.layui-status-img, .layuiadmin-card-team .layui-team-img {
     width: 32px;
     height: 32px;
     border-radius: 50%;
@@ -970,7 +970,7 @@ html {
     line-height: 32px
 }
 
-.layuiadmin-card-status dd div.layui-status-img img,.layuiadmin-card-team .layui-team-img img {
+.layuiadmin-card-status dd div.layui-status-img img, .layuiadmin-card-team .layui-team-img img {
     width: 50%;
     height: 50%
 }
@@ -1072,7 +1072,7 @@ html {
     padding-bottom: 10px
 }
 
-.layuiadmin-card-status li>span {
+.layuiadmin-card-status li > span {
     color: #999
 }
 
@@ -1157,12 +1157,12 @@ html {
     overflow-x: hidden
 }
 
-.layadmin-setTheme>h5 {
+.layadmin-setTheme > h5 {
     padding: 20px 0 10px;
     color: #000
 }
 
-.layadmin-setTheme>h5:first-child {
+.layadmin-setTheme > h5:first-child {
     padding-top: 0
 }
 
@@ -1198,7 +1198,7 @@ html {
     opacity: 0
 }
 
-.layadmin-setTheme-color li.layui-this:after,.layadmin-setTheme-color li:hover:after {
+.layadmin-setTheme-color li.layui-this:after, .layadmin-setTheme-color li:hover:after {
     width: 100%;
     height: 100%;
     padding: 4px;
@@ -1223,7 +1223,7 @@ html {
     width: 20px;
     height: 100%;
     z-index: 11;
-    box-shadow: 1px 0 2px 0 rgba(0,0,0,.05)
+    box-shadow: 1px 0 2px 0 rgba(0, 0, 0, .05)
 }
 
 .layadmin-setTheme-logo {
@@ -1232,7 +1232,7 @@ html {
     top: 0;
     width: 100%;
     height: 10px;
-    box-shadow: 0 1px 2px 0 rgba(0,0,0,.15)
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .15)
 }
 
 .layadmin-form-right {
@@ -1264,21 +1264,21 @@ html {
 
 @-webkit-keyframes layui-rl {
     from {
-        -webkit-transform: translate3d(100%,0,0)
+        -webkit-transform: translate3d(100%, 0, 0)
     }
 
     to {
-        -webkit-transform: translate3d(0,0,0)
+        -webkit-transform: translate3d(0, 0, 0)
     }
 }
 
 @keyframes layui-rl {
     from {
-        transform: translate3d(100%,0,0)
+        transform: translate3d(100%, 0, 0)
     }
 
     to {
-        transform: translate3d(0,0,0)
+        transform: translate3d(0, 0, 0)
     }
 }
 
@@ -1289,27 +1289,27 @@ html {
 
 @-webkit-keyframes layui-lr {
     from {
-        -webkit-transform: translate3d(0 0,0);
+        -webkit-transform: translate3d(0 0, 0);
         opacity: 1
     }
 
     to {
-        -webkit-transform: translate3d(100%,0,0);
+        -webkit-transform: translate3d(100%, 0, 0);
         opacity: 1
     }
 }
 
 @keyframes layui-lr {
     from {
-        transform: translate3d(0,0,0)
+        transform: translate3d(0, 0, 0)
     }
 
     to {
-        transform: translate3d(100%,0,0)
+        transform: translate3d(100%, 0, 0)
     }
 }
 
-.layui-anim-lr,.layui-anim-rl.layer-anim-close {
+.layui-anim-lr, .layui-anim-rl.layer-anim-close {
     -webkit-animation-name: layui-lr;
     animation-name: layui-lr
 }
@@ -1345,7 +1345,7 @@ html {
 
 @media screen and (max-width: 768px) {
     .layadmin-panel-selection {
-        margin:0;
+        margin: 0;
         width: auto
     }
 
