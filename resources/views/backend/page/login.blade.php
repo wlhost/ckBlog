@@ -27,6 +27,7 @@
                 <input type="text" name="username" id="LAY-user-login-username" lay-verify="required|username" placeholder="用户名"
                        class="layui-input">
             </div>
+            {{ csrf_field() }}
             <div class="layui-form-item">
                 <label class="layadmin-user-login-icon layui-icon layui-icon-password"
                        for="LAY-user-login-password"></label>
@@ -38,12 +39,12 @@
                     <div class="layui-col-xs7">
                         <label class="layadmin-user-login-icon layui-icon layui-icon-vercode"
                                for="LAY-user-login-vercode"></label>
-                        <input type="text" name="code" id="LAY-user-login-vercode" lay-verify="required"
+                        <input type="text" name="captcha" id="LAY-user-login-vercode" lay-verify="required"
                                placeholder="图形验证码" class="layui-input">
                     </div>
                     <div class="layui-col-xs5">
                         <div style="margin-left: 10px;">
-                            <img src="https://www.oschina.net/action/user/captcha" class="layadmin-user-login-codeimg"
+                            <img src="{{captcha_src()}}" onclick="this.src='{{captcha_src()}}'+Math.random()" class="layadmin-user-login-codeimg"
                                  id="LAY-user-get-vercode">
                         </div>
                     </div>
@@ -74,39 +75,40 @@
     }).use(['index', 'form'], function () {
         var $ = layui.$
             , form = layui.form
-            ,admin = layui.admin
-
-        // 表单验证， 验证是否符合标准
-        form.verify({
-            username: function(e, s) {
-                return new RegExp("^[a-zA-Z0-9_一-龥\\s·]+$").test(e) ? /(^\_)|(\__)|(\_+$)/.test(e) ? "用户名首尾不能出现下划线'_'" : /^\d+\d+\d$/.test(e) ? "用户名不能全为数字" : void 0 : "用户名不能有特殊字符"
-            },
-            password: [/^[\S]{6,12}$/, "密码必须6到12位，且不能出现空格"]
-        });
 
         //提交
         form.on('submit(LAY-user-login-submit)', function (obj) {
-            //请求登入接口
-            admin.req({
-                url: layui.setter.base + 'json/user/login.js' //实际使用请改成服务端真实接口
-                , data: obj.field
-                , done: function (res) {
-                    console.log(res);
-                    return;
-                    //请求成功后，写入 access_token
-                    layui.data(setter.tableName, {
-                        key: setter.request.tokenName
-                        , value: res.data.access_token
-                    });
 
-                    //登入成功的提示与跳转
+            $.ajax({
+                type: "POST",
+                url:"{{ url('admin/login') }}",
+                data:obj.field,
+                dataType:'json',
+                success: function(res) {
+                    console.log(res);
                     layer.msg('登入成功', {
                         offset: '15px'
                         , icon: 1
                         , time: 1000
                     }, function () {
-                        location.href = '../'; //后台主页
+                        location.href = "{{ url('admin') }}"; //后台主页
                     });
+                },
+                error : function (msg) {
+                    if (msg.status == 422) {
+                        var json=JSON.parse(msg.responseText);
+                        json = json.errors;
+                        for ( var item in json) {
+                            for ( var i = 0; i < json[item].length; i++) {
+                                layer.msg(JSON.parse(json[item][i]).msg);
+                                return ; //遇到验证错误，就退出
+                            }
+                        }
+
+                    } else {
+                        alert('服务器连接失败');
+                        return ;
+                    }
                 }
             });
 

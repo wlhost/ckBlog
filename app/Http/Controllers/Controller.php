@@ -14,9 +14,11 @@ class Controller extends BaseController
 
     /**
      * json格式返回
+     * $code 正常返回1，错误返回0
      */
-    public function toJson($code,$data,$count=0,$msg='')
+    public function toJson($code,$msg='',$data=[])
     {
+        $count = count($data);
         $res = [
             'code' => $code,
             'msg' => $msg,
@@ -26,11 +28,4 @@ class Controller extends BaseController
         return $res;
     }
 
-    /**
-     * 加密密码
-     * @param $password
-     */
-    public function md5Password($password,$prefix="ck&%157!%.") {
-        return sha1(md5($prefix . $password) . md5($password));
-    }
 }

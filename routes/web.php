@@ -15,8 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-Route::namespace('Admin')->prefix('/admin')->group(function (){
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin' , 'middleware' => ['admin.auth']], function () {
     Route::get('/','AdminController@index');
     Route::get('/console','AdminController@console');  // 控制台
 
@@ -29,11 +28,13 @@ Route::namespace('Admin')->prefix('/admin')->group(function (){
 });
 
 
-// auth
-Route::group(['namespace' => 'Auth', 'prefix' => 'auth'], function () {
+// 后台登录页面
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
+    // 登录页面
+    Route::get('login', 'LoginController@index')->middleware('admin.login');
+    // 登录操作
+    Route::post('login', 'LoginController@login');
+    // 退出
+    Route::get('logout', 'LoginController@logout');
 
-    // 后台登录
-    Route::group(['prefix' => 'admin'], function () {
-        Route::get('/', 'AdminController@login');
-    });
 });

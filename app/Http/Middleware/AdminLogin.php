@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class AdminAuth
+class AdminLogin
 {
     /**
      * Handle an incoming request.
@@ -15,8 +15,9 @@ class AdminAuth
      */
     public function handle($request, Closure $next)
     {
-        if (!session('admin.is_login')) {
-            return redirect('admin/login');
+        // 如果登录;则重定向到首页
+        if (session('admin.is_login') == 1) {
+            return redirect('admin');
         }
         return $next($request);
     }

@@ -28,8 +28,9 @@ class AdminController extends Controller
     protected $redirectTo = '/admin';
 
 
-    public function login()
+    public function index()
     {
         return view('backend.page.login');
     }
+
 }
