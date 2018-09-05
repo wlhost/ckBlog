@@ -17,7 +17,7 @@ class LoginController extends Controller
     //
     public function index()
     {
-        return view('backend.page.login');
+        return view('backend.login.login');
     }
 
     public function login(login $request)
@@ -47,8 +47,6 @@ class LoginController extends Controller
         }else {
             return $this->toJson(0,'账号或密码不正确');
         }
-
-
-
     }
+
 }

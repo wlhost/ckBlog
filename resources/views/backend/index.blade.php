@@ -102,9 +102,10 @@
                     <li data-name="app" class="layui-nav-item">
                         <a href="javascript:;" lay-tips="应用" lay-direction="2">
                             <i class="layui-icon layui-icon-app"></i>
-                            <cite>应用</cite>
+                            <cite>文章管理</cite>
                         </a>
                         <dl class="layui-nav-child">
+                            <dd data-name="list"><a lay-href="{{ url('admin/articleAdd') }}">发布文章</a></dd>
                             <dd data-name="list"><a lay-href="{{ url('admin/article') }}">文章列表</a></dd>
                             <dd data-name="tags"><a lay-href="app/content/tags.html">分类管理</a></dd>
                             <dd data-name="comment"><a lay-href="app/content/comment.html">评论管理</a></dd>
