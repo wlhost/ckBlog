@@ -65,4 +65,14 @@ class AdminController extends Controller
         return view('backend.admin.adminadd');
     }
 
+
+    public function adminUpdate(Request $request, $id)
+    {
+        if ($request->isMethod('post')) {
+            var_dump(1);
+            exit;
+        }
+        $admin = DB::table('ck_admin')->where('id',$id)->first();
+        return view('backend.admin.adminupdate',['admin' => $admin]);
+    }
 }

@@ -23,10 +23,32 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['adm
     Route::get('jsonAdminlist', 'AdminController@jsonAdminlist');  // 管理员列表json
     Route::get('adminAdd', 'AdminController@adminAdd');  // 管理员添加页面
     Route::post('adminAdd', 'AdminController@adminAdd');  // 管理员添加
+    Route::get('adminUpdate/{id}','AdminController@adminUpdate');   //管理员修改
+    Route::post('adminUpdate','AdminController@adminUpdate');   //管理员修改
+    Route::post('adminDel','AdminController@adminDel');   //管理员修改
 
     /******* 文章 ********/
-    Route::get('articleAdd', 'ArticleController@articleAdd');  // 发布文章页面
-    Route::get('article', 'ArticleController@index');  // 文章管理页面
+    Route::group(['prefix' => 'article'],function() {
+        Route::get('index', 'ArticleController@index');  // 文章管理页面
+        Route::get('jsonArticle', 'ArticleController@jsonArticle');  // 文章管理页面
+        Route::get('store', 'ArticleController@store');  // 文章添加页面
+        Route::post('store', 'ArticleController@store');  // 文章添加逻辑
+
+    });
+
+    /********* 导航 ***********/
+    Route::group(['prefix' => 'nav'],function() {
+        Route::get('index', 'NavController@index');  // 文章管理页面
+        Route::get('jsonNav', 'NavController@jsonNav');  // 文章管理页面
+        Route::get('store', 'NavController@store');  // 文章添加页面
+        Route::post('store', 'NavController@store');  // 文章添加逻辑
+        Route::get('update/{id}', 'NavController@update');  // 文章添加逻辑
+        Route::post('update', 'NavController@update');  // 文章添加逻辑
+        Route::get('delete', 'NavController@delete');  // 文章添加逻辑
+
+    });
+
+
     /********* 分类 ***********/
     Route::get('category', 'CategoryController@index');
     Route::get('catAdd', 'CategoryController@catAdd');
@@ -39,10 +61,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['adm
     Route::get('tag', 'TagController@index');
     Route::get('tagAdd', 'TagController@tagAdd');
     Route::post('tagAdd', 'TagController@tagAdd');
-    /********* 导航 ***********/
-    Route::get('nav', 'NavController@index');
-    Route::get('navAdd', 'NavController@navAdd');
-    Route::post('navAdd', 'NavController@navAdd');
+
+
 
 });
 

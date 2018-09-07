@@ -65,9 +65,9 @@
             <table id="LAY-app-content-list" lay-filter="LAY-app-content-list"></table>
             <script type="text/html" id="buttonTpl">
 
-                <button class="layui-btn layui-btn-xs">已发布</button>
+                <button class="layui-btn layui-btn-xs">置顶</button>
 
-                <button class="layui-btn layui-btn-primary layui-btn-xs">待修改</button>
+                <button class="layui-btn layui-btn-primary layui-btn-xs">未置顶</button>
 
             </script>
             <script type="text/html" id="table-content-list">
@@ -93,18 +93,18 @@
 
         table.render({
             elem: "#LAY-app-content-list",
-            url: layui.setter.base + "json/content/list.js",
+            url: "{{  url('/admin/article/jsonArticle') }}",
             cols: [[{
                 type: "checkbox",
                 fixed: "left"
             }, {
                 field: "id",
-                width: 100,
-                title: "文章ID",
+                width: 50,
+                title: "ID",
                 sort: !0
             }, {
-                field: "label",
-                title: "文章标签",
+                field: "category_id",
+                title: "分类",
                 minWidth: 100
             }, {
                 field: "title",
@@ -113,12 +113,12 @@
                 field: "author",
                 title: "作者"
             }, {
-                field: "uploadtime",
+                field: "created_at",
                 title: "上传时间",
                 sort: !0
             }, {
-                field: "status",
-                title: "发布状态",
+                field: "is_top",
+                title: "是否置顶",
                 templet: "#buttonTpl",
                 minWidth: 80,
                 align: "center"
@@ -131,8 +131,15 @@
             }]],
             page: !0,
             limit: 10,
-            limits: [10, 15, 20, 25, 30],
             text: "对不起，加载出现异常！"
+            ,parseData: function (res) { //将原始数据解析成 table 组件所规定的数据
+                return {
+                    "code": res.code, //解析接口状态
+                    "msg": res.msg, //解析提示文本
+                    "count": res.count, //解析数据长度
+                    "data": res.data.data //解析数据列表
+                };
+            }
         });
 
 

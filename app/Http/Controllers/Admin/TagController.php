@@ -13,4 +13,5 @@ class TagController extends Controller
 
         return view('backend.tag.index');
     }
+
 }
