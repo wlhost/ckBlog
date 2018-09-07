@@ -25,32 +25,6 @@
                     </div>
                 </div>
                 <div class="layui-inline">
-                    <label class="layui-form-label">手机</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="telphone" placeholder="请输入" autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-inline">
-                    <label class="layui-form-label">邮箱</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="email" placeholder="请输入" autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-inline">
-                    <label class="layui-form-label">角色</label>
-                    <div class="layui-input-block">
-                        <select name="role">
-                            <option value="0">管理员</option>
-                            <option value="1">超级管理员</option>
-                            <option value="2">纠错员</option>
-                            <option value="3">采购员</option>
-                            <option value="4">推销员</option>
-                            <option value="5">运营人员</option>
-                            <option value="6">编辑</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="layui-inline">
                     <button class="layui-btn layuiadmin-btn-admin" lay-submit lay-filter="LAY-user-back-search">
                         <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
                     </button>
@@ -88,7 +62,7 @@
         base: "{{ URL::asset('backend/') }}/" //静态资源所在路径
     }).extend({
         index: 'lib/index' //主入口模块
-    }).use(['index', 'useradmin', 'table'], function(){
+    }).use(['index', 'table'], function(){
         var $ = layui.$
             ,form = layui.form
             ,table = layui.table;
@@ -128,8 +102,8 @@
             }]],
             text: "对不起，加载出现异常！",
             page: true,
-            limit: 5
-            ,parseData: function(res){ //将原始数据解析成 table 组件所规定的数据
+
+            parseData: function(res){ //将原始数据解析成 table 组件所规定的数据
                 return {
                     "code": res.code, //解析接口状态
                     "msg": res.msg, //解析提示文本
@@ -138,6 +112,7 @@
                 };
             }
         })
+
 
 
         //监听搜索
@@ -162,12 +137,12 @@
 
                 layer.prompt({
                     formType: 1
-                    ,title: '敏感操作，请验证口令'
+                    ,title: '敏感操作，请验证口令!'
                 }, function(value, index){
+                    alert(value);
                     layer.close(index);
 
                     layer.confirm('确定删除吗？', function(index) {
-
                         //执行 Ajax 后重载
                         /*
                         admin.req({
@@ -193,8 +168,6 @@
                             ,submit = layero.find('iframe').contents().find('#'+ submitID);
 
                         //监听提交
-
-
                         submit.trigger('click');
                     }
                 });

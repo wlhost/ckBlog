@@ -33,10 +33,10 @@ class AdminController extends Controller
     public function jsonAdminlist(Request $request)
     {
         $param = $request->all();
+        $count = Admin::where('name', 'like', isset($param['loginname']) ? "%{$param['loginname']}%" : "%%")->count();
+        $data = Admin::where('name', 'like', isset($param['loginname']) ? "%{$param['loginname']}%" : "%%")->paginate($param['limit']);
 
-        $data = Admin::paginate($param['page']);
-
-        return $this->toJson(0,'成功',$data);
+        return $this->toJson(0, '成功', $data, $count);
     }
 
     // 添加管理员页面
@@ -44,10 +44,10 @@ class AdminController extends Controller
     {
         if ($request->isMethod('post')) {
             $validateData = $request->validate([
-               'name' => 'required',
-               'nickname' => 'required',
-               'password' => 'required',
-               'email' => 'required',
+                'name' => 'required',
+                'nickname' => 'required',
+                'password' => 'required',
+                'email' => 'required',
             ]);
             $admin = new Admin();
             $admin->name = $request->input('name');
@@ -56,9 +56,9 @@ class AdminController extends Controller
             $admin->email = $request->input('email');
             $result = $admin->save();
             if ($result) {
-                return $this->toJson(1,'新增成功');
-            }else {
-                return $this->toJson(0,'系统错误');
+                return $this->toJson(1, '新增成功');
+            } else {
+                return $this->toJson(0, '系统错误');
             }
         }
 

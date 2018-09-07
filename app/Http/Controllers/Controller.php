@@ -16,9 +16,8 @@ class Controller extends BaseController
      * json格式返回
      * $code 正常返回1，错误返回0
      */
-    public function toJson($code,$msg='',$data=[])
+    public function toJson($code,$msg='',$data=[],$count=0)
     {
-        $count = count($data);
         $res = [
             'code' => $code,
             'msg' => $msg,
