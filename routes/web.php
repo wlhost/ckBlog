@@ -48,6 +48,17 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['adm
 
     });
 
+    Route::group(['prefix' => 'category'],function() {
+        Route::get('index', 'CategoryController@index');  // 文章管理页面
+        Route::get('jsonCategory', 'CategoryController@jsonCategory');  // 文章管理页面
+        Route::get('store', 'CategoryController@store');  // 文章添加页面
+        Route::post('store', 'CategoryController@store');  // 文章添加逻辑
+        Route::get('update/{id}', 'CategoryController@update');  // 文章添加逻辑
+        Route::post('update', 'CategoryController@update');  // 文章添加逻辑
+        Route::get('delete', 'CategoryController@delete');  // 文章添加逻辑
+
+    });
+
 
     /********* 分类 ***********/
     Route::get('category', 'CategoryController@index');

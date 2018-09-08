@@ -21,7 +21,7 @@
             <div class="layui-form-item">
 
                 <div class="layui-inline">
-                    <label class="layui-form-label">分类名称</label>
+                    <label class="layui-form-label">导航名称</label>
                     <div class="layui-input-inline">
                         <input type="text" name="name" placeholder="请输入" autocomplete="off" class="layui-input">
                     </div>
