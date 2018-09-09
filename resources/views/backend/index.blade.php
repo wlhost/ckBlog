@@ -105,12 +105,12 @@
                             <cite>文章管理</cite>
                         </a>
                         <dl class="layui-nav-child">
-                            <dd data-name="list"><a lay-href="{{ url('admin/articleAdd') }}">发布文章</a></dd>
+                            <dd data-name="list"><a lay-href="{{ url('admin/article/store') }}">发布文章</a></dd>
                             <dd data-name="list"><a lay-href="{{ url('admin/article/index') }}">文章列表</a></dd>
                             <dd data-name="comment"><a lay-href="{{ url('admin/nav/index') }}">导航管理</a></dd>
                             <dd data-name="tags"><a lay-href="{{ url('admin/category/index') }}">分类管理</a></dd>
                             <dd data-name="comment"><a lay-href="{{ url('admin/comment') }}">评论管理</a></dd>
-                            <dd data-name="comment"><a lay-href="{{ url('admin/tag') }}">标签管理</a></dd>
+                            <dd data-name="comment"><a lay-href="{{ url('admin/tag/index') }}">标签管理</a></dd>
                         </dl>
                     </li>
                     <li data-name="user" class="layui-nav-item">
@@ -123,10 +123,7 @@
                                 <a lay-href="user/user/list.html">网站用户</a>
                             </dd>
                             <dd>
-                                <a lay-href="{{ url('admin/adminlist')  }}">后台管理员</a>
-                            </dd>
-                            <dd>
-                                <a lay-href="user/administrators/role.html">角色管理</a>
+                                <a lay-href="{{ url('admin/admin/list')  }}">后台管理员</a>
                             </dd>
                         </dl>
                     </li>

@@ -6,7 +6,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>ckadmin---导航管理</title>
+    <title>ckadmin---标签管理</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -16,23 +16,10 @@
 <body>
 
 <div class="layui-form" lay-filter="layuiadmin-app-form-list" id="layuiadmin-app-form-list" style="padding: 20px 30px 0 0;">
-    <input type="hidden" name="id" value="{{ $nav['id']  }}">
     <div class="layui-form-item">
-        <label class="layui-form-label">导航名称</label>
+        <label class="layui-form-label">标签名称</label>
         <div class="layui-input-inline">
-            <input type="text" name="name" lay-verify="required" value="{{ $nav['name'] }}" placeholder="请输入导航名称" autocomplete="off" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">链接</label>
-        <div class="layui-input-inline">
-            <input type="text" name="url" lay-verify="required" value="{{ $nav['url'] }}" placeholder="请输入链接" autocomplete="off" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">排序</label>
-        <div class="layui-input-inline">
-            <input name="sort" lay-verify="required"  value="{{ $nav['sort'] }}" autocomplete="off" class="layui-input">
+            <input type="text" name="name" lay-verify="required" placeholder="请输入标签名称" autocomplete="off" class="layui-input">
         </div>
     </div>
     {{ csrf_field() }}
@@ -58,7 +45,7 @@
             var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
 
             $.ajax({
-                url : "{{  url('/admin/nav/update') }}",
+                url : "{{  url('/admin/tag/store') }}",
                 method : 'POST',
                 data: field,
                 dataType: 'json',
@@ -68,12 +55,10 @@
                 success: function (res) {
                     if (res.code == 0) {
                         layer.closeAll('loading');
-                        layer.msg(res.msg,function () {
-                            var index=parent.layer.getFrameIndex(window.name);
-                            parent.layer.close(index);
-                            parent.layui.table.reload('LAY-app-content-list'); //重载表格
-                            parent.layer.close(index); //再执行关闭
-                        });
+                        var index=parent.layer.getFrameIndex(window.name);
+                        parent.layer.close(index); //再执行关闭
+                        layer.msg(res.msg);
+                        parent.layui.table.reload('LAY-app-content-list'); //重载表格
                     } else {
                         layer.msg('系统错误');
                     }
@@ -84,12 +69,10 @@
                         json = json.errors;
                         for ( var item in json) {
                             for ( var i = 0; i < json[item].length; i++) {
-                                layer.msg(json[item][i],function () {
-                                    var index=parent.layer.getFrameIndex(window.name);
-                                    parent.layer.close(index);
-                                    parent.layui.table.reload('LAY-app-content-list'); //重载表格
-                                    parent.layer.close(index); //再执行关闭
-                                });
+                                layer.msg(json[item][i]);
+                                var index=parent.layer.getFrameIndex(window.name);
+                                parent.layui.table.reload('LAY-app-content-list'); //重载表格
+                                parent.layer.close(index); //再执行关闭
                             }
                         }
 

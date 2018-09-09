@@ -10,6 +10,11 @@
     <link rel="stylesheet" href="{{ URL::asset('backend/layui/css/layui.css') }}" media="all">
     <link rel="stylesheet" href="{{ URL::asset('backend/style/admin.css') }}" media="all">
     <link rel="stylesheet" href="{{ URL::asset('backend/style/login.css') }}" media="all">
+    <style>
+        body{
+            background: url("https://www.xwboke.cn/api/api.php");
+        }
+    </style>
 </head>
 <body>
 
@@ -85,7 +90,6 @@
                 data:obj.field,
                 dataType:'json',
                 success: function(res) {
-                    console.log(res);
                     layer.msg('登入成功', {
                         offset: '15px'
                         , icon: 1

@@ -37,26 +37,9 @@
                         <div class="layui-input-inline">
                             <select name="category_id" lay-verify="required" lay-search="">
                                 <option value="">直接选择或搜索选择</option>
-                                <option value="1">layer</option>
-                                <option value="2">form</option>
-                                <option value="3">layim</option>
-                                <option value="4">element</option>
-                                <option value="5">laytpl</option>
-                                <option value="6">upload</option>
-                                <option value="7">laydate</option>
-                                <option value="8">laypage</option>
-                                <option value="9">flow</option>
-                                <option value="10">util</option>
-                                <option value="11">code</option>
-                                <option value="12">tree</option>
-                                <option value="13">layedit</option>
-                                <option value="14">nav</option>
-                                <option value="15">tab</option>
-                                <option value="16">table</option>
-                                <option value="17">select</option>
-                                <option value="18">checkbox</option>
-                                <option value="19">switch</option>
-                                <option value="20">radio</option>
+                                @foreach($category as $item)
+                                <option value="{{$item['id']}}">{{$item['name']}}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -65,7 +48,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">文章标签</label>
                     <div class="layui-input-block">
-                        <input type="text" name="tags" lay-verify="required" autocomplete="off"
+                        <input type="text" name="tags" id="tags" lay-verify="required" autocomplete="off"
                                class="layui-input">
                     </div>
                 </div>
@@ -75,7 +58,6 @@
                         <textarea name="content">### 在此输入文章!</textarea>
                     </div>
                 </div>
-
 
 
 
@@ -137,10 +119,9 @@
 <script src="{{ URL::asset('backend/lib/editormd/editormd.min.js') }}"></script>
 
 <script>
-    var testEditor;
-
+    var editor;
     $(function() {
-        testEditor = editormd("article", {
+        editor = editormd("article", {
             width   : "100%",
             height  : 640,
             syncScrolling : "single",
@@ -153,8 +134,8 @@
     layui.config({
         base: "{{ URL::asset('backend/') }}/" //静态资源所在路径
     }).extend({
-        index: 'lib/index' //主入口模块
-    }).use(['index', 'form', 'laydate','upload'], function () {
+        index: 'lib/index' //主入口模块,
+    }).use(['index','form', 'laydate','upload'], function () {
         var $ = layui.$
             , admin = layui.admin
             , element = layui.element

@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>layuiAdmin 内容系统 - 文章列表</title>
+    <title>ckadmin---导航管理</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -79,7 +79,7 @@
                 field: "id",
                 width: 50,
                 title: "ID",
-                sort: !0
+                sort: !0,
             }, {
                 field: "name",
                 title: "导航名称",
@@ -90,7 +90,8 @@
             }, {
                 field: "sort",
                 title: "排序",
-                edit: 'text'
+                edit: 'text',
+                sort: !0,
             },  {
                 field: "created_at",
                 title: "创建时间",
@@ -150,7 +151,7 @@
                 title: "编辑文章",
                 content:"update/" + e.id,
                 maxmin: !0,
-                area: ["550px", "550px"],
+                area: ['350px', '350px'],
                 btn: ["确定", "取消"],
                 yes: function (e, i) {
                     //点击确认触发 iframe 内容中的按钮提交
@@ -262,7 +263,7 @@
                     ,title: '添加导航'
                     ,content: "{{URL('admin/nav/store')}}"
                     ,maxmin: true
-                    ,area: ['550px', '550px']
+                    ,area: ['350px', '350px']
                     ,btn: ['确定', '取消']
                     ,yes: function(index, layero){
                         //点击确认触发 iframe 内容中的按钮提交

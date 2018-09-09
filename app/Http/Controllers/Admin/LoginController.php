@@ -43,9 +43,15 @@ class LoginController extends Controller
                 ]
             ];
             session($data);
-            return $this->toJson(1,'登录成功');
+            return response()->json([
+                'code' => 0,
+                'msg' => '登录成功'
+            ]);
         }else {
-            return $this->toJson(0,'账号或密码不正确');
+            return response()->json([
+                'code' => -1,
+                'msg' => '账号或密码不正确'
+            ]);
         }
     }
 

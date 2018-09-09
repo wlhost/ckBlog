@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>ckadmin-分类管理</title>
+    <title>ckadmin-管理员管理</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -21,7 +21,7 @@
             <div class="layui-form-item">
 
                 <div class="layui-inline">
-                    <label class="layui-form-label">分类名称</label>
+                    <label class="layui-form-label">管理员名称</label>
                     <div class="layui-input-inline">
                         <input type="text" name="name" placeholder="请输入" autocomplete="off" class="layui-input">
                     </div>
@@ -71,7 +71,7 @@
 
         table.render({
             elem: "#LAY-app-content-list",
-            url: "{{  url('/admin/category/jsonCategory') }}",
+            url: "{{  url('/admin/admin/jsonAdmin') }}",
             cols: [[{
                 type: "checkbox",
                 fixed: "left"
@@ -82,21 +82,17 @@
                 sort: !0
             }, {
                 field: "name",
-                title: "分类名称",
+                title: "管理员名称",
             }, {
-                field: "pid",
-                title: "上级分类"
+                field: "nickname",
+                title: "昵称"
             },{
-                field: "keywords",
-                title: "关键字"
+                field: "avatar",
+                title: "头像"
             },{
-                field: "description",
-                title: "描述"
+                field: "email",
+                title: "邮箱"
             }, {
-                field: "sort",
-                title: "排序",
-                edit: 'text'
-            },  {
                 field: "created_at",
                 title: "创建时间",
                 sort: !0
@@ -126,9 +122,9 @@
 
         table.on("tool(LAY-app-content-list)", function (t) {
             var e = t.data;
-            "del" === t.event ? layer.confirm("确定删除此分类？", function (index) {
+            "del" === t.event ? layer.confirm("确定删除此管理员？", function (index) {
                 $.ajax({
-                    url : "{{  url('/admin/category/delete') }}",
+                    url : "{{  url('/admin/admin/delete') }}",
                     method : 'GET',
                     data: {
                         'id': e.id
@@ -152,10 +148,10 @@
 
             }) : "edit" === t.event && layer.open({
                 type: 2,
-                title: "编辑分类",
+                title: "编辑管理员",
                 content:"update/" + e.id,
                 maxmin: !0,
-                area: ["550px", "550px"],
+                area: ['430px', '550px'],
                 btn: ["确定", "取消"],
                 yes: function (e, i) {
                     //点击确认触发 iframe 内容中的按钮提交
@@ -173,7 +169,7 @@
                     ,field = obj.field; //得到字段
 
                 $.ajax({
-                    url : "{{  url('/admin/category/update') }}",
+                    url : "{{  url('/admin/admin/update') }}",
                     method : 'POST',
                     data: {
                         'id' : data.id,
@@ -240,7 +236,7 @@
                     }
 
                     $.ajax({
-                        url : "{{  url('/admin/nav/delete') }}",
+                        url : "{{  url('/admin/admin/delete') }}",
                         method : 'GET',
                         data: {
                             'id': ids
@@ -266,8 +262,8 @@
             add: function(){
                 layer.open({
                     type: 2
-                    ,title: '添加分类'
-                    ,content: "{{URL('admin/category/store')}}"
+                    ,title: '添加管理员'
+                    ,content: "{{URL('admin/admin/store')}}"
                     ,maxmin: true
                     ,area: ['430px', '550px']
                     ,btn: ['确定', '取消']

@@ -6,7 +6,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>ckadmin-分类管理</title>
+    <title>ckadmin-管理员管理</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -16,45 +16,38 @@
 <body>
 
 <div class="layui-form" lay-filter="layuiadmin-app-form-list" id="layuiadmin-app-form-list" style="padding: 20px 30px 0 0;">
-    <input type="hidden" value="{{ $category['id'] }}" name="id">
+    <div class="layui-form-item" style="text-align: center">
+        <img id="uploadAvatar" src="{{ $admin['avatar'] }}" alt="" class="layui-status-img" style="max-width:96px;max-height: 96px;">
+        <input type="hidden" name="avatar" id="avatar" value="{{ $admin['avatar'] }}">
+    </div>
+    <input type="hidden" name="id" value="{{ $admin['id'] }}">
+
     <div class="layui-form-item">
-        <label class="layui-form-label">分类名称</label>
+        <label class="layui-form-label">管理员名称</label>
         <div class="layui-input-inline">
-            <input type="text" name="name" lay-verify="required" value="{{ $category['name'] }}" placeholder="请输入分类名称" autocomplete="off" class="layui-input">
+            <input type="text" name="name" lay-verify="required" placeholder="请输入管理员名称" value="{{ $admin['name'] }}" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">昵称</label>
+        <div class="layui-input-inline">
+            <input type="text" name="nickname" lay-verify="required" placeholder="请输入昵称" value="{{ $admin['nickname'] }}" autocomplete="off" class="layui-input">
         </div>
     </div>
 
     <div class="layui-form-item">
-        <label class="layui-form-label">父级栏目</label>
+        <label class="layui-form-label">密码</label>
         <div class="layui-input-inline">
-            <div class="layui-col-md6">
-                <select name="pid" lay-verify="required" lay-search="">
-                    <option value="0">顶级分类</option>
-                    <option value="1">layer</option>
-                </select>
-            </div>
+            <input type="text" name="password" placeholder="请输入密码" value="" autocomplete="off" class="layui-input">
         </div>
     </div>
 
     <div class="layui-form-item">
-        <label class="layui-form-label">关键字</label>
+        <label class="layui-form-label">邮箱</label>
         <div class="layui-input-inline">
-            <textarea type="text" name="keywords" lay-verify="required" placeholder="请输入关键字" autocomplete="off" class="layui-textarea">{{ $category['keywords'] }}
-            </textarea>
-        </div>
-    </div>
-
-    <div class="layui-form-item">
-        <label class="layui-form-label">描述</label>
-        <div class="layui-input-inline">
-            <textarea type="text" name="description" lay-verify="required" placeholder="请输入描述" autocomplete="off" class="layui-textarea">{{ $category['description'] }}</textarea>
-        </div>
-    </div>
-
-    <div class="layui-form-item">
-        <label class="layui-form-label">排序</label>
-        <div class="layui-input-inline">
-            <input type="text" name="sort" lay-verify="required" placeholder="请输入排序" autocomplete="off" value="{{ $category['sort'] }}" class="layui-input">
+            <input type="text" name="email" lay-verify="required|email" placeholder="请输入email" value="{{ $admin['email'] }}" autocomplete="off" class="layui-input">
         </div>
     </div>
 
@@ -71,13 +64,33 @@
         base:  "{{ URL::asset('backend/') }}/" //静态资源所在路径
     }).extend({
         index: 'lib/index' //主入口模块
-    }).use(['index', 'form'], function(){
+    }).use(['index','upload', 'form'], function(){
         var $ = layui.$
-            ,form = layui.form;
+            ,form = layui.form
+            ,upload = layui.upload;
 
-        form.val('layuiadmin-app-form-list', {
-            'pid' : "{{ $category['pid'] }}"
-        })
+        var imgAvatar = '';
+        var uploadInst = upload.render({
+            elem: '#uploadAvatar'
+            ,url: "{{  url('/admin/admin/upload') }}"
+            ,before: function(obj){
+                //预读本地文件示例，不支持ie8
+                this.data={'_token':$("input[name='_token']").val()};
+                obj.preview(function(index, file, result){
+                    $('#uploadAvatar').attr('src', result); //图片链接（base64）
+                });
+            }
+            ,done: function(res){
+                //如果上传失败
+                $('#avatar').val(res.url);
+                if(res.code == 0){
+                    layer.msg('上传成功');
+                }
+                //上传成功
+            }
+        });
+
+
         //监听提交
         form.on('submit(layuiadmin-app-form-submit)', function(data){
             var field = data.field; //获取提交的字段
@@ -85,7 +98,7 @@
             var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
 
             $.ajax({
-                url : "{{  url('/admin/category/update') }}",
+                url : "{{  url('/admin/admin/update') }}",
                 method : 'POST',
                 data: field,
                 dataType: 'json',

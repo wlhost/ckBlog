@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Article;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -29,20 +30,90 @@ class ArticleController extends Controller
                 $query->where('title','like', "%{$param['title']}%");
             }
         });
-        $data = $articles->paginate($param['limit']);
         $count = $articles->count();
-
+        $data = $articles->paginate($param['limit']);
         return response()->json([
-           'code' => 0,
-           'count' => $count,
-           'data' =>$data,
+            'code' => 0,
+            'msg' => 'SUCCESS',
+            'count' => $count,
+            'data' =>$data,
         ]);
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        return view('backend.article.store');
+        if ($request->isMethod('post')) {
+            $request->validate([
+                'name' => 'required|unique:ck_categories|max:255',
+                'pid' => 'required|integer|max:255',
+                'sort' => 'required|unique:ck_categories|integer|between:0,255',
+                'keywords' => 'required',
+                'description' => 'required',
+            ]);
+            Article::create([
+                'name' => $request['name'],
+                'pid' => $request['pid'],
+                'sort' => $request['sort'],
+                'keywords' => $request['keywords'],
+                'description' => $request['description'],
+            ]);
+            return response()->json([
+                'code' => 0,
+                'msg' => 'SUCCESS',
+                'count' => 0,
+                'data' =>0,
+            ]);
+        }
+
+        $category = Category::where('pid',0)->get();
+        return view('backend.article.store',['category'=>$category]);
     }
 
+
+    public function update(Request $request,$id=0) {
+
+        if ($request->isMethod('post')) {
+            $request->validate([
+                'name' => 'required|max:255',
+                'pid' => 'required|integer|max:255',
+                'sort' => 'required|unique:ck_categories|integer|between:0,255',
+                'keywords' => 'required',
+                'description' => 'required',
+            ]);
+            Article::where('id',$request['id'])->update([
+                'name' => $request['name'],
+                'pid' => $request['pid'],
+                'sort' => $request['sort'],
+                'keywords' => $request['keywords'],
+                'description' => $request['description'],
+            ]);
+            return response()->json([
+                'code' => 0,
+                'msg' => 'SUCCESS',
+                'count' => 0,
+                'data' =>0,
+            ]);
+        }
+
+        $article = Article::find($id)->toArray();
+        return view('backend.article.update',['article' => $article]);
+    }
+
+
+    public function delete(Request $request){
+        if (is_array($request['id'])) {
+            foreach ($request['id'] as $item) {
+                Article::where('id',$item)->delete();
+            }
+        }else {
+            Article::where('id',$request['id'])->delete();
+        }
+        return response()->json([
+            'code' => 0,
+            'msg' => 'SUCCESS',
+            'count' => 0,
+            'data' =>0,
+        ]);
+    }
 
 }

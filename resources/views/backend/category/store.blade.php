@@ -6,7 +6,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>layuiAdmin 文章管理 iframe 框</title>
+    <title>ckadmin-分类管理</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -26,21 +26,30 @@
     <div class="layui-form-item">
         <label class="layui-form-label">父级栏目</label>
         <div class="layui-input-inline">
-            <input type="text" name="pid" lay-verify="required" placeholder="请输入链接" autocomplete="off" class="layui-input">
+            <div class="layui-col-md6">
+                <select name="pid" lay-verify="required" lay-search="">
+                    <option value="0">顶级分类</option>
+                    @foreach ($pid as $item)
+                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                    @endforeach
+
+
+                </select>
+            </div>
         </div>
     </div>
 
     <div class="layui-form-item">
         <label class="layui-form-label">关键字</label>
         <div class="layui-input-inline">
-            <input type="text" name="keywords" lay-verify="required" placeholder="请输入关键字" autocomplete="off" class="layui-input">
+            <textarea type="text" name="keywords" lay-verify="required" placeholder="请输入关键字" autocomplete="off" class="layui-textarea"></textarea>
         </div>
     </div>
 
     <div class="layui-form-item">
         <label class="layui-form-label">描述</label>
         <div class="layui-input-inline">
-            <input type="text" name="description" lay-verify="required" placeholder="请输入描述" autocomplete="off" class="layui-input">
+            <textarea type="text" name="description" lay-verify="required" placeholder="请输入描述" autocomplete="off" class="layui-textarea"></textarea>
         </div>
     </div>
 
@@ -71,10 +80,11 @@
         //监听提交
         form.on('submit(layuiadmin-app-form-submit)', function(data){
             var field = data.field; //获取提交的字段
+
             var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
 
             $.ajax({
-                url : "{{  url('/admin/nav/store') }}",
+                url : "{{  url('/admin/category/store') }}",
                 method : 'POST',
                 data: field,
                 dataType: 'json',

@@ -42,14 +42,18 @@ class CategoryController extends Controller
     {
         if ($request->isMethod('post')) {
             $request->validate([
-                'name' => 'required|unique:ck_navs|max:255',
-                'url' => 'required|max:255',
-                'sort' => 'required|unique:ck_navs|integer|between:0,255',
+                'name' => 'required|unique:ck_categories|max:255',
+                'pid' => 'required|integer|max:255',
+                'sort' => 'required|unique:ck_categories|integer|between:0,255',
+                'keywords' => 'required',
+                'description' => 'required',
             ]);
             Category::create([
                 'name' => $request['name'],
-                'url' => $request['url'],
+                'pid' => $request['pid'],
                 'sort' => $request['sort'],
+                'keywords' => $request['keywords'],
+                'description' => $request['description'],
             ]);
             return response()->json([
                 'code' => 0,
@@ -58,7 +62,9 @@ class CategoryController extends Controller
                 'data' =>0,
             ]);
         }
-        return view('backend.category.store');
+
+        $pid = Category::where('pid',0)->get();
+        return view('backend.category.store',['pid'=>$pid]);
     }
 
 
@@ -67,13 +73,17 @@ class CategoryController extends Controller
         if ($request->isMethod('post')) {
             $request->validate([
                 'name' => 'required|max:255',
-                'url' => 'required|max:255',
-                'sort' => 'required|unique:ck_navs|integer|between:0,255',
+                'pid' => 'required|integer|max:255',
+                'sort' => 'required|unique:ck_categories|integer|between:0,255',
+                'keywords' => 'required',
+                'description' => 'required',
             ]);
             Category::where('id',$request['id'])->update([
                 'name' => $request['name'],
-                'url' => $request['url'],
+                'pid' => $request['pid'],
                 'sort' => $request['sort'],
+                'keywords' => $request['keywords'],
+                'description' => $request['description'],
             ]);
             return response()->json([
                 'code' => 0,
@@ -84,7 +94,7 @@ class CategoryController extends Controller
         }
 
         $data = Category::find($id)->toArray();
-        return view('backend.category.update',['nav' => $data]);
+        return view('backend.category.update',['category' => $data]);
     }
 
 
