@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
 
 class ArticleController extends Controller
 {
@@ -43,10 +45,14 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         if ($request->isMethod('post')) {
+
             $request->validate([
-                'name' => 'required|unique:ck_categories|max:255',
-                'pid' => 'required|integer|max:255',
-                'sort' => 'required|unique:ck_categories|integer|between:0,255',
+                'title' => 'required|unique:ck_articles|max:255',
+                'category_id' => 'required|integer|max:255',
+                'tags' => 'required|integer|max:255',
+                'author' => 'required|max:255',
+                'content' => 'required',
+                'article-html-code' => 'required',
                 'keywords' => 'required',
                 'description' => 'required',
             ]);
@@ -66,7 +72,8 @@ class ArticleController extends Controller
         }
 
         $category = Category::where('pid',0)->get();
-        return view('backend.article.store',['category'=>$category]);
+        $tags = Tag::all();
+        return view('backend.article.store',['category'=>$category,'tag' => $tags]);
     }
 
 

@@ -65,7 +65,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['adm
     /********* 标签 ***********/
     Route::group(['prefix' => 'tag'],function() {
         Route::get('index', 'TagController@index');  // 标签管理页面
-        Route::get('jsonTag', 'TagController@jsonCategory');  // 标签管理页面
+        Route::get('jsonTag', 'TagController@jsonTag');  // 标签管理页面
         Route::get('store', 'TagController@store');  //标签添加页面
         Route::post('store', 'TagController@store');  // 标签添加逻辑
         Route::get('update/{id}', 'TagController@update');  // 标签添加逻辑

@@ -17,7 +17,7 @@ class TagController extends Controller
         return view('backend.tag.index');
     }
     // 分类页面数据
-    public function jsonCategory(Request $request)
+    public function jsonTag(Request $request)
     {
         $param = $request->all();
         $tag = Tag::select()->where(function($query) use ($param) {

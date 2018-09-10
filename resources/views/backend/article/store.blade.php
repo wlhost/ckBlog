@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="{{ URL::asset('backend/layui/css/layui.css') }}" media="all">
     <link rel="stylesheet" href="{{ URL::asset('backend/style/admin.css') }}" media="all">
     <link rel="stylesheet" href="{{ URL::asset('backend/style/editormd.min.css') }}" />
+    <link rel="stylesheet" href="{{ URL::asset('backend/style/formSelects-v4.css') }}" />
+    {{ csrf_field() }}
 </head>
 <body>
 
@@ -45,11 +47,15 @@
                     </div>
                 </div>
 
+
                 <div class="layui-form-item">
                     <label class="layui-form-label">文章标签</label>
                     <div class="layui-input-block">
-                        <input type="text" name="tags" id="tags" lay-verify="required" autocomplete="off"
-                               class="layui-input">
+                        <select name="tags" xm-select="select7_1" xm-select-search="" xm-select-create="">
+                            @foreach($tag as $item)
+                                <option value="{{$item['id']}}">{{$item['name']}}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
 
@@ -80,7 +86,7 @@
                     <div class="layui-input-block">
                         <div class="layui-card-body">
                             <div class="layui-upload">
-                                <button type="button" class="layui-btn" id="cover">上传图片</button>
+                                <button type="button" class="layui-btn" id="upload">上传图片</button>
                                 <div class="layui-upload-list">
                                     <img class="layui-upload-img" style="max-width:400px;" id="cover-img">
                                 </div>
@@ -127,44 +133,48 @@
             syncScrolling : "single",
             path    : "{{ URL::asset('backend/lib/editormd') }}/",
             watch: true,
-            emoji: true
+            emoji: true,
+            saveHTMLToTextarea : true,
         });
     });
+
+
 
     layui.config({
         base: "{{ URL::asset('backend/') }}/" //静态资源所在路径
     }).extend({
         index: 'lib/index' //主入口模块,
-    }).use(['index','form', 'laydate','upload'], function () {
+    }).use(['index','form','formSelects', 'laydate','upload'], function () {
         var $ = layui.$
             , admin = layui.admin
             , element = layui.element
             , layer = layui.layer
             , laydate = layui.laydate
             , form = layui.form
-            , upload = layui.upload;
+            , upload = layui.upload
+            , formSelect = layui.formSelects
 
 
         var uploadInst = upload.render({
-            elem: '#cover'
-            ,url: '/upload/'
+            elem: '#upload'
+            ,url: "{{  url('/admin/admin/upload') }}"
             ,before: function(obj){
                 //预读本地文件示例，不支持ie8
+                this.data={'_token':$("input[name='_token']").val()};
                 obj.preview(function(index, file, result){
                     $('#cover-img').attr('src', result); //图片链接（base64）
                 });
             }
             ,done: function(res){
                 //如果上传失败
-                if(res.code > 0){
-                    return layer.msg('上传失败');
+                $('#avatar').val(res.url);
+                if(res.code == 0){
+                    layer.msg('上传成功');
                 }
                 //上传成功
             }
-            ,error: function(){
-                layer.msg('上传失败');
-            }
         });
+
 
 
         form.render(null, 'component-form-group');
@@ -183,10 +193,47 @@
 
         /* 监听提交 */
         form.on('submit(component-form-demo1)', function (data) {
-            parent.layer.alert(JSON.stringify(data.field), {
-                title: '最终的提交信息'
-            })
-            return false;
+
+            console.log(data.field);
+            $.ajax({
+                url : "{{  url('/admin/article/store') }}",
+                method : 'POST',
+                data: data.field,
+                dataType: 'json',
+                beforeSend :function() {
+                    layer.load(2);
+                    this.data = {
+                        'imgs' : $('#cover-img').attr('src', result)
+                    }
+                },
+                success: function (res) {
+                    console.log(res);
+                    return false;
+                    // if (res.code == 0) {
+                    //
+                    //     layer.closeAll('loading');
+                    //     layer.msg(res.msg,function () {
+                    //
+                    //     });
+                    // } else {
+                    //     layer.msg('系统错误');
+                    // }
+                },
+                // error : function (msg) {
+                //     if (msg.status == 422) {
+                //         var json=JSON.parse(msg.responseText);
+                //         json = json.errors;
+                //         for ( var item in json) {
+                //             for ( var i = 0; i < json[item].length; i++) {
+                //                 layer.msg(json[item][i]);
+                //                 return false;
+                //             }
+                //         }
+                //
+                //     }
+                // }
+            });
+
         });
     });
 </script>
