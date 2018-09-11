@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+
+Route::get('/', '\App\Http\Controllers\Home\IndexController@index');
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['admin.auth']], function () {
     Route::get('/', 'AdminController@index');
@@ -21,56 +21,60 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['adm
 
     /********* 后台管理员 ***********/
     Route::group(['prefix' => 'admin'],function() {
-        Route::post('upload','AdminController@upload');  //上传
-        Route::get('list', 'AdminController@list');  // 文章管理页面
-        Route::get('jsonAdmin', 'AdminController@jsonAdmin');  // 文章管理页面
-        Route::get('store', 'AdminController@store');  // 文章添加页面
-        Route::post('store', 'AdminController@store');  // 文章添加逻辑
-        Route::get('update/{id}', 'AdminController@update');  // 文章添加逻辑
-        Route::post('update', 'AdminController@update');  // 文章添加逻辑
-        Route::get('delete', 'AdminController@delete');  // 文章添加逻辑
+        Route::post('upload','AdminController@upload');
+        Route::post('editorMd','AdminController@editorMd');
+        Route::get('list', 'AdminController@list');
+        Route::get('jsonAdmin', 'AdminController@jsonAdmin');
+        Route::get('store', 'AdminController@store');
+        Route::post('store', 'AdminController@store');
+        Route::get('update/{id}', 'AdminController@update');
+        Route::post('update', 'AdminController@update');
+        Route::get('delete', 'AdminController@delete');
     });
 
     /******* 文章 ********/
     Route::group(['prefix' => 'article'],function() {
-        Route::get('index', 'ArticleController@index');  // 文章管理页面
-        Route::get('jsonArticle', 'ArticleController@jsonArticle');  // 文章管理页面
-        Route::get('store', 'ArticleController@store');  // 文章添加页面
-        Route::post('store', 'ArticleController@store');  // 文章添加逻辑
+        Route::get('index', 'ArticleController@index');
+        Route::get('jsonArticle', 'ArticleController@jsonArticle');
+        Route::get('store', 'ArticleController@store');
+        Route::post('store', 'ArticleController@store');
+        Route::get('update/{id}', 'ArticleController@update');
+        Route::post('update', 'ArticleController@update');
+        Route::get('delete', 'ArticleController@delete');
 
     });
 
     /********* 导航 ***********/
     Route::group(['prefix' => 'nav'],function() {
-        Route::get('index', 'NavController@index');  // 文章管理页面
-        Route::get('jsonNav', 'NavController@jsonNav');  // 文章管理页面
-        Route::get('store', 'NavController@store');  // 文章添加页面
-        Route::post('store', 'NavController@store');  // 文章添加逻辑
-        Route::get('update/{id}', 'NavController@update');  // 文章添加逻辑
-        Route::post('update', 'NavController@update');  // 文章添加逻辑
-        Route::get('delete', 'NavController@delete');  // 文章添加逻辑
+        Route::get('index', 'NavController@index');
+        Route::get('jsonNav', 'NavController@jsonNav');
+        Route::get('store', 'NavController@store');
+        Route::post('store', 'NavController@store');
+        Route::get('update/{id}', 'NavController@update');
+        Route::post('update', 'NavController@update');
+        Route::get('delete', 'NavController@delete');
     });
 
     /********* 分类 ***********/
     Route::group(['prefix' => 'category'],function() {
-        Route::get('index', 'CategoryController@index');  // 文章管理页面
-        Route::get('jsonCategory', 'CategoryController@jsonCategory');  // 文章管理页面
-        Route::get('store', 'CategoryController@store');  // 文章添加页面
-        Route::post('store', 'CategoryController@store');  // 文章添加逻辑
-        Route::get('update/{id}', 'CategoryController@update');  // 文章添加逻辑
-        Route::post('update', 'CategoryController@update');  // 文章添加逻辑
-        Route::get('delete', 'CategoryController@delete');  // 文章添加逻辑
+        Route::get('index', 'CategoryController@index');
+        Route::get('jsonCategory', 'CategoryController@jsonCategory');
+        Route::get('store', 'CategoryController@store');
+        Route::post('store', 'CategoryController@store');
+        Route::get('update/{id}', 'CategoryController@update');
+        Route::post('update', 'CategoryController@update');
+        Route::get('delete', 'CategoryController@delete');
     });
 
     /********* 标签 ***********/
     Route::group(['prefix' => 'tag'],function() {
-        Route::get('index', 'TagController@index');  // 标签管理页面
-        Route::get('jsonTag', 'TagController@jsonTag');  // 标签管理页面
-        Route::get('store', 'TagController@store');  //标签添加页面
-        Route::post('store', 'TagController@store');  // 标签添加逻辑
-        Route::get('update/{id}', 'TagController@update');  // 标签添加逻辑
-        Route::post('update', 'TagController@update');  // 标签添加逻辑
-        Route::get('delete', 'TagController@delete');  // 标签添加逻辑
+        Route::get('index', 'TagController@index');
+        Route::get('jsonTag', 'TagController@jsonTag');
+        Route::get('store', 'TagController@store');
+        Route::post('store', 'TagController@store');
+        Route::get('update/{id}', 'TagController@update');
+        Route::post('update', 'TagController@update');
+        Route::get('delete', 'TagController@delete');
     });
 
     /********* 评论 ***********/
@@ -81,7 +85,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['adm
 
 
 });
-
 
 // 后台登录页面
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {

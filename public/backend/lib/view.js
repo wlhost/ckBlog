@@ -1,11 +1,12 @@
 /** ckAdmin **/
 ;layui.define(["laytpl", "layer"], function (e) {
     var t = layui.jquery, n = layui.laytpl, a = layui.layer, r = layui.setter, o = (layui.device(), layui.hint()),
-        i = function (e) {
-            return new d(e)
-        }, s = "LAY_app_body", d = function (e) {
-            this.id = e, this.container = t("#" + (e || s))
-        };
+
+    i = function (e) {
+        return new d(e)
+    }, s = "LAY_app_body", d = function (e) {
+        this.id = e, this.container = t("#" + (e || s))
+    };
     i.loading = function (e) {
         e.append(this.elemLoad = t('<i class="layui-anim layui-anim-rotate layui-anim-loop layui-icon layui-icon-loading layadmin-loading"></i>'))
     }, i.removeLoad = function () {

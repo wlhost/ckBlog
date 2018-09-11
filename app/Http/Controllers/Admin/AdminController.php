@@ -144,4 +144,27 @@ class AdminController extends Controller
             'url'=>'uploads/'.$path
         ]);
     }
+
+    // 上传图片
+    public function editorMd(Request $request){
+
+        if(!$request->hasFile('editormd-image-file')){
+            $request->session()->flash('error_msg','文件不存在');
+            return back();
+        }
+        $img = $request->file('editormd-image-file');
+        // 获取后缀名
+        $ext = $img->extension();
+        // 新文件名
+        $saveName =time().rand().".".$ext;
+        // 存储文件 已经不使用 move 这种方式
+        // $img->move('./uploads/'.date('Ymd'),$saveName);
+        // 使用 store 存储文件
+        $path = $img->store(date('Ymd'));
+        return response()->json([
+            'success' =>  1,           // 0 表示上传失败，1 表示上传成功
+            'message' => "上传成功",
+            'url'=>'/uploads/'.$path
+        ]);
+    }
 }

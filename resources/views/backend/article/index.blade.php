@@ -63,13 +63,7 @@
                 <button class="layui-btn layuiadmin-btn-list" data-type="add">添加</button>
             </div>
             <table id="LAY-app-content-list" lay-filter="LAY-app-content-list"></table>
-            <script type="text/html" id="buttonTpl">
 
-                <button class="layui-btn layui-btn-xs">置顶</button>
-
-                <button class="layui-btn layui-btn-primary layui-btn-xs">未置顶</button>
-
-            </script>
             <script type="text/html" id="table-content-list">
                 <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a>
                 <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon layui-icon-delete"></i>删除</a>
@@ -85,11 +79,46 @@
         base: "{{ URL::asset('backend/') }}/" //静态资源所在路径
     }).extend({
         index: 'lib/index' //主入口模块
-    }).use(['index', 'contlist', 'table'], function(){
+    }).use(['index', 'table'], function(){
 
         var table = layui.table
-            ,form = layui.form;
+            ,form = layui.form
+            ,lay = layer.laytpl
 
+        table.on("tool(LAY-app-content-list)", function (t) {
+            var e = t.data;
+            "del" === t.event ? layer.confirm("确定删除此文章？", function (index) {
+                $.ajax({
+                    url : "{{  url('/admin/article/delete') }}",
+                    method : 'GET',
+                    data: {
+                        'id': e.id
+                    },
+                    dataType: 'json',
+                    beforeSend :function() {
+                        layer.load(2);
+                    },
+                    success: function (res) {
+                        if (res.code == 0) {
+                            layer.closeAll('loading');
+                            layer.msg(res.msg);
+                        } else {
+                            layer.msg('系统错误');
+                        }
+                        layer.close(index);
+                        table.reload('LAY-app-content-list');
+                    }
+                });
+
+            }) : "edit" === t.event &&  layer.full(layer.open({
+                type: 2,
+                title: "编辑文章",
+                content:"update/" + e.id,
+                maxmin: true,
+                area: ["550px", "550px"],
+            }));
+
+        }),
 
         table.render({
             elem: "#LAY-app-content-list",
@@ -119,7 +148,6 @@
             }, {
                 field: "is_top",
                 title: "是否置顶",
-                templet: "#buttonTpl",
                 minWidth: 80,
                 align: "center"
             }, {
@@ -163,16 +191,32 @@
                 }
 
                 layer.confirm('确定删除吗？', function(index) {
+                    var ids = [];
+                    for (var i=0; i<checkData.length; i++) {
+                        ids.push(checkData[i].id);
+                    }
 
-                    //执行 Ajax 后重载
-                    /*
-                    admin.req({
-                      url: 'xxx'
-                      //,……
+                    $.ajax({
+                        url : "{{  url('/admin/article/delete') }}",
+                        method : 'GET',
+                        data: {
+                            'id': ids
+                        },
+                        dataType: 'json',
+                        beforeSend :function() {
+                            layer.load(2);
+                        },
+                        success: function (res) {
+                            if (res.code == 0) {
+                                layer.closeAll('loading');
+                                layer.msg(res.msg);
+                                table.reload('LAY-app-content-list');
+                            } else {
+                                layer.msg('系统错误');
+                            }
+
+                        }
                     });
-                    */
-                    table.reload('LAY-app-content-list');
-                    layer.msg('已删除');
                 });
             },
             add: function(){

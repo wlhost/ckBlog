@@ -19,12 +19,13 @@
     <div class="layui-card">
 
         <div class="layui-card-header">发布文章</div>
+        <input type="hidden" name="id" value="{{ $article['id'] }}">
         <div class="layui-card-body" style="padding: 15px;">
             <form class="layui-form" action="" lay-filter="component-form-group">
                 <div class="layui-form-item">
                     <label class="layui-form-label">文章标题</label>
                     <div class="layui-input-block">
-                        <input type="text" name="title" lay-verify="required" autocomplete="off" placeholder="请输入标题"
+                        <input type="text" name="title" value="{{ $article['title'] }}" lay-verify="required" autocomplete="off" placeholder="请输入标题"
                                class="layui-input">
                     </div>
                 </div>
@@ -32,8 +33,8 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">作者</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="author" lay-verify="required" autocomplete="off" placeholder=""
-                                   value="ichenkun" class="layui-input">
+                            <input type="text" name="author" lay-verify="required"  autocomplete="off" placeholder=""
+                                   value="{{ $article['author'] }}" class="layui-input">
                         </div>
 
                         <label class="layui-form-label">文章分类</label>
@@ -62,7 +63,7 @@
 
                 <div class="layui-form-item layui-form-text">
                     <div class="editormd" id="article">
-                        <textarea name="content">### 在此输入文章!</textarea>
+                        <textarea name="content">{{ $article['markdown']  }}</textarea>
                     </div>
                 </div>
 
@@ -71,14 +72,14 @@
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">描述</label>
                     <div class="layui-input-block">
-                        <textarea name="description" placeholder="请输入描述" class="layui-textarea"></textarea>
+                        <textarea name="description" placeholder="请输入描述" class="layui-textarea">{{ $article['description'] }}</textarea>
                     </div>
                 </div>
 
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">关键字</label>
                     <div class="layui-input-block">
-                        <textarea name="keywords" placeholder="请输入关键字" class="layui-textarea"></textarea>
+                        <textarea name="keywords" placeholder="请输入关键字" class="layui-textarea"> {{ $article['keywords'] }}</textarea>
                     </div>
                 </div>
 
@@ -90,7 +91,7 @@
                                 <button type="button" class="layui-btn" id="upload">上传图片</button>
                                 <input type="hidden" value="" name="cover" id="cover">
                                 <div class="layui-upload-list">
-                                    <img class="layui-upload-img" style="max-width:400px;" id="cover-img">
+                                    <img class="layui-upload-img" src="{{ $article['cover'] }}" style="max-width:400px;" id="cover-img">
                                 </div>
                             </div>
 
@@ -145,6 +146,8 @@
 
 
 
+
+
     layui.config({
         base: "{{ URL::asset('backend/') }}/" //静态资源所在路径
     }).extend({
@@ -159,6 +162,10 @@
             , upload = layui.upload
             , formSelect = layui.formSelects
 
+        formSelect.value('select7_1', [2, 4]);
+        form.val('component-form-group', {
+           'category_id' : [1]
+        })
 
         var uploadInst = upload.render({
             elem: '#upload'
@@ -194,7 +201,7 @@
         form.on('submit(component-form-demo1)', function (data) {
             console.log(data.field);
             $.ajax({
-                url : "{{  url('/admin/article/store') }}",
+                url : "{{  url('/admin/article/update') }}",
                 method : 'POST',
                 data: data.field,
                 dataType: 'json',

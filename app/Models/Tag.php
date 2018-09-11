@@ -11,4 +11,7 @@ class Tag extends Base
 
 
     protected $fillable = ['name'];
+
+
+
 }

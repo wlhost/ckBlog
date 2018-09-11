@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Article;
+use App\Models\ArticleTags;
 use App\Models\Category;
 use App\Models\Tag;
 use Illuminate\Http\Request;
@@ -19,17 +20,18 @@ class ArticleController extends Controller
     }
 
     // json返回文章数据
-    public function jsonArticle(Request $request) {
+    public function jsonArticle(Request $request)
+    {
         $param = $request->all();
-        $articles = Article::select()->where(function($query) use ($param) {
+        $articles = Article::select()->where(function ($query) use ($param) {
             if (isset($param['id']) && $param['id'] != '') {
-                $query->where('id',$param['id']);
+                $query->where('id', $param['id']);
             }
             if (isset($param['author']) && $param['author'] != '') {
-                $query->where('author','like', "%{$param['author']}%");
+                $query->where('author', 'like', "%{$param['author']}%");
             }
             if (isset($param['title']) && $param['title'] != '') {
-                $query->where('title','like', "%{$param['title']}%");
+                $query->where('title', 'like', "%{$param['title']}%");
             }
         });
         $count = $articles->count();
@@ -38,88 +40,134 @@ class ArticleController extends Controller
             'code' => 0,
             'msg' => 'SUCCESS',
             'count' => $count,
-            'data' =>$data,
+            'data' => $data,
         ]);
     }
 
     public function store(Request $request)
     {
         if ($request->isMethod('post')) {
-
             $request->validate([
                 'title' => 'required|unique:ck_articles|max:255',
-                'category_id' => 'required|integer|max:255',
-                'tags' => 'required|integer|max:255',
                 'author' => 'required|max:255',
+                'category_id' => 'required|integer|max:255',
+                'tags' => 'required|max:255',
                 'content' => 'required',
-                'article-html-code' => 'required',
                 'keywords' => 'required',
-                'description' => 'required',
             ]);
-            Article::create([
-                'name' => $request['name'],
-                'pid' => $request['pid'],
-                'sort' => $request['sort'],
+
+            if ($request['description'] == '') {
+                $description = preg_replace(array('/[~*>#-]*/', '/!?\[.*\]\(.*\)/', '/\[.*\]/'), '', $request['content']);
+                $request['description'] = $this->re_substr($description, 0, 200, true);
+            }
+
+            if (isset($request['is_top']) && $request['is_top'] == 'on') {
+                $top = 1;
+            } else {
+                $top = 0;
+            }
+            $article = Article::create([
+                'category_id' => $request['category_id'],
+                'title' => $request['title'],
+                'author' => $request['author'],
+                'markdown' => $request['content'],
+                'html' => $request['article-html-code'],
+                'author' => $request['author'],
                 'keywords' => $request['keywords'],
                 'description' => $request['description'],
+                'cover' => $request['cover'],
+                'is_top' => $top,
             ]);
+            // 插入标签
+            $tags = explode(',',$request['tags']);
+            for ($i=0;$i<count($tags);$i++) {
+                ArticleTags::create([
+                    'article_id' => $article->id,
+                    'tag_id' => $tags[$i]
+                ]);
+            }
             return response()->json([
                 'code' => 0,
                 'msg' => 'SUCCESS',
                 'count' => 0,
-                'data' =>0,
+                'data' => 0,
             ]);
         }
 
-        $category = Category::where('pid',0)->get();
+        $category = Category::where('pid', 0)->get();
         $tags = Tag::all();
-        return view('backend.article.store',['category'=>$category,'tag' => $tags]);
+        return view('backend.article.store', ['category' => $category, 'tag' => $tags]);
     }
 
+    public  function re_substr($str, $start = 0, $length, $suffix = true, $charset = "utf-8") {
+        $slice = mb_substr($str, $start, $length, $charset);
+        $omit = mb_strlen($str) >= $length ? '...' : '';
+        return $suffix ? $slice.$omit : $slice;
+    }
 
-    public function update(Request $request,$id=0) {
+    public function update(Request $request, $id = 0)
+    {
 
         if ($request->isMethod('post')) {
             $request->validate([
-                'name' => 'required|max:255',
-                'pid' => 'required|integer|max:255',
-                'sort' => 'required|unique:ck_categories|integer|between:0,255',
+                'title' => 'required|max:255',
+                'author' => 'required|max:255',
+                'category_id' => 'required|integer|max:255',
+                'tags' => 'required|max:255',
+                'content' => 'required',
                 'keywords' => 'required',
-                'description' => 'required',
             ]);
-            Article::where('id',$request['id'])->update([
-                'name' => $request['name'],
-                'pid' => $request['pid'],
-                'sort' => $request['sort'],
+            if ($request['description'] == '') {
+                $description = preg_replace(array('/[~*>#-]*/', '/!?\[.*\]\(.*\)/', '/\[.*\]/'), '', $request['content']);
+                $request['description'] = $this->re_substr($description, 0, 200, true);
+            }
+
+            if (isset($request['is_top']) && $request['is_top'] == 'on') {
+                $top = 1;
+            } else {
+                $top = 0;
+            }
+            Article::where('id', $request['id'])->update([
+                'category_id' => $request['category_id'],
+                'title' => $request['title'],
+                'author' => $request['author'],
+                'markdown' => $request['content'],
+                'html' => $request['article-html-code'],
+                'author' => $request['author'],
                 'keywords' => $request['keywords'],
                 'description' => $request['description'],
+                'cover' => $request['cover'],
+                'is_top' => $top,
             ]);
             return response()->json([
                 'code' => 0,
                 'msg' => 'SUCCESS',
                 'count' => 0,
-                'data' =>0,
+                'data' => 0,
             ]);
         }
 
-        $article = Article::find($id)->toArray();
-        return view('backend.article.update',['article' => $article]);
+        $article = Article::where('id',$id)->first();
+        $category = Category::where('pid', 0)->get();
+        $tags = Tag::all();
+        return view('backend.article.update', ['category' => $category, 'tag' => $tags , 'article' => $article]);
     }
 
 
-    public function delete(Request $request){
+    public function delete(Request $request)
+    {
         if (is_array($request['id'])) {
             foreach ($request['id'] as $item) {
-                Article::where('id',$item)->delete();
+                Article::where('id', $item)->delete();
             }
-        }else {
-            Article::where('id',$request['id'])->delete();
+        } else {
+            Article::where('id', $request['id'])->delete();
         }
         return response()->json([
             'code' => 0,
             'msg' => 'SUCCESS',
             'count' => 0,
-            'data' =>0,
+            'data' => 0,
         ]);
     }
 

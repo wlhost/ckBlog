@@ -42,8 +42,6 @@
         //监听提交
         form.on('submit(layuiadmin-app-form-submit)', function(data){
             var field = data.field; //获取提交的字段
-            console.log(field);
-            return;
             var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
 
             $.ajax({
