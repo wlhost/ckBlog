@@ -139,7 +139,7 @@
 
             <!-- CAROUSEL -->
             <div class="eskimo-widget-title">
-                <h3 class="eskimo-carousel-title"><span>点击排行</span></h3>
+                <h3 class="eskimo-carousel-title"><span>点击排行!</span></h3>
             </div>
 
             <div class="eskimo-carousel-container">
