@@ -28,7 +28,10 @@ class LoginController extends Controller
         // 查找数据验证账户
         $res = DB::table('ck_admin')->where('name',$data['username'])->first();
         if (!$res) {
-            return $this->toJson(0);
+            return response()->json([
+                'code' => -1,
+                'msg' => '账号或密码不正确'
+            ]);
         }
         // hash验证
         if (Hash::check($data['password'],$res->password))
