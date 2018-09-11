@@ -96,3 +96,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::get('logout', 'LoginController@logout');
 
 });
+
+
+
+Route::get('hook/github','\App\Http\Controllers\Hook\GithubController@up');
