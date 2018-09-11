@@ -144,7 +144,7 @@
 
             <div class="eskimo-carousel-container">
                 <div class="eskimo-carousel-view-more">
-                    <a href="blog.html">VIEW ALL</a>
+                    <a href="blog.html">查看全部</a>
                 </div>
 
                 <div id="eskimo-post-carousel" class="eskimo-carousel">
