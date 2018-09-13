@@ -18,7 +18,7 @@ class IndexController extends Controller
     protected $config = [];
     public function __construct()
     {
-        $res = Category::orderBy('id')->get()->toArray();
+        $res = Category::orderBy('sort','ASC')->get()->toArray();
         $this->category = \IchenkunFun::unlimitedForLayer($res);
         $result = Config::all()->toArray();
         $this->config = Config::configToKV($result);
