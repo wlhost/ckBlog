@@ -50,14 +50,14 @@
     <div class="layui-form-item">
         <label class="layui-form-label">关键字</label>
         <div class="layui-input-inline">
-            <textarea type="text" name="keywords" lay-verify="required" placeholder="请输入关键字" autocomplete="off" class="layui-textarea"></textarea>
+            <textarea type="text" name="keywords" lay-verify="" placeholder="请输入关键字" autocomplete="off" class="layui-textarea"></textarea>
         </div>
     </div>
 
     <div class="layui-form-item">
         <label class="layui-form-label">描述</label>
         <div class="layui-input-inline">
-            <textarea type="text" name="description" lay-verify="required" placeholder="请输入描述" autocomplete="off" class="layui-textarea"></textarea>
+            <textarea type="text" name="description" lay-verify="" placeholder="请输入描述" autocomplete="off" class="layui-textarea"></textarea>
         </div>
     </div>
 

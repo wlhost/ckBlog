@@ -22,6 +22,7 @@
         <input type="hidden" name="id" value="{{ $article['id'] }}">
         <div class="layui-card-body" style="padding: 15px;">
             <form class="layui-form" action="" lay-filter="component-form-group">
+                <input type="hidden" value="{{ $article['id'] }}" name="id">
                 <div class="layui-form-item">
                     <label class="layui-form-label">文章标题</label>
                     <div class="layui-input-block">
@@ -92,6 +93,7 @@
                                 <input type="hidden" value="" name="cover" id="cover">
                                 <div class="layui-upload-list">
                                     <img class="layui-upload-img" src="{{ $article['cover'] }}" style="max-width:400px;" id="cover-img">
+                                    <input type="hidden" name="cover" value="{{ $article['cover'] }}">
                                 </div>
                             </div>
 
@@ -162,7 +164,8 @@
             , upload = layui.upload
             , formSelect = layui.formSelects
 
-        formSelect.value('select7_1', [2, 4]);
+
+        formSelect.value('select7_1', [{{$seletTag}}]);
         form.val('component-form-group', {
            'category_id' : [1]
         })

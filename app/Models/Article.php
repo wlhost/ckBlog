@@ -33,4 +33,15 @@ class Article extends Base
         return $this->belongsToMany(Tag::class, 'ck_article_tags');
     }
 
+
+    public static function getCover($content, $except = [])
+    {
+        // 获取文章中的全部图片
+        preg_match_all('/!\[.*?\]\((\S*(?<=png|gif|jpg|jpeg)).*?\)/i', $content, $images);
+        if (empty($images[1])) {
+            $cover = '/home/images/blog.jpg';
+        }
+        return $cover;
+    }
+
 }

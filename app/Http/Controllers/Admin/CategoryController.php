@@ -46,8 +46,8 @@ class CategoryController extends Controller
                 'alias' => 'required|max:255',
                 'pid' => 'required|integer|max:255',
                 'sort' => 'required|unique:ck_categories|integer|between:0,255',
-                'keywords' => 'required',
-                'description' => 'required',
+                'keywords' => '',
+                'description' => '',
             ]);
             Category::create([
                 'name' => $request['name'],

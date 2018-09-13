@@ -41,11 +41,9 @@
                     <div class="layui-input-inline">
                         <select name="label">
                             <option value="">请选择标签</option>
-                            <option value="0">美食</option>
-                            <option value="1">新闻</option>
-                            <option value="2">八卦</option>
-                            <option value="3">体育</option>
-                            <option value="4">音乐</option>
+                            @foreach($tag as $v)
+                            <option value="{{ $v['id'] }}">{{ $v['name'] }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -54,6 +52,8 @@
                         <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
                     </button>
                 </div>
+
+
             </div>
         </div>
 
@@ -82,7 +82,7 @@
 
         var table = layui.table
             ,form = layui.form
-            ,lay = layer.laytpl
+
 
         table.on("tool(LAY-app-content-list)", function (t) {
             var e = t.data;
@@ -148,7 +148,7 @@
                 field: "is_top",
                 title: "是否置顶",
                 minWidth: 80,
-                align: "center"
+                align: "center",
             }, {
                 title: "操作",
                 minWidth: 150,

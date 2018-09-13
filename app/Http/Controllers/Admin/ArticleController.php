@@ -16,7 +16,8 @@ class ArticleController extends Controller
 
     public function index(Request $request)
     {
-        return view('backend.article.index');
+        $tag = Tag::all();
+        return view('backend.article.index',['tag' => $tag]);
     }
 
     // json返回文章数据
@@ -36,6 +37,16 @@ class ArticleController extends Controller
         });
         $count = $articles->count();
         $data = $articles->paginate($param['limit']);
+
+        for ($i=0;$i<$count;$i++) {
+            $data[$i]['category_id'] = Category::where('id',$data[$i]['category_id'])->first()->toArray()['name'];
+
+            if ($data[$i]['is_top'] ==0) {
+                $data[$i]['is_top'] = '未置顶';
+            }else {
+                $data[$i]['is_top'] = '置顶';
+            }
+        }
         return response()->json([
             'code' => 0,
             'msg' => 'SUCCESS',
@@ -66,13 +77,15 @@ class ArticleController extends Controller
             } else {
                 $top = 0;
             }
+            if (empty($request['cover'])) {
+                $request['cover'] = Article::getCover($request['content']);
+            }
             $article = Article::create([
                 'category_id' => $request['category_id'],
                 'title' => $request['title'],
                 'author' => $request['author'],
                 'markdown' => $request['content'],
                 'html' => $request['article-html-code'],
-                'author' => $request['author'],
                 'keywords' => $request['keywords'],
                 'description' => $request['description'],
                 'cover' => $request['cover'],
@@ -133,7 +146,6 @@ class ArticleController extends Controller
                 'author' => $request['author'],
                 'markdown' => $request['content'],
                 'html' => $request['article-html-code'],
-                'author' => $request['author'],
                 'keywords' => $request['keywords'],
                 'description' => $request['description'],
                 'cover' => $request['cover'],
@@ -150,7 +162,12 @@ class ArticleController extends Controller
         $article = Article::where('id',$id)->first();
         $category = Category::all();
         $tags = Tag::all();
-        return view('backend.article.update', ['category' => $category, 'tag' => $tags , 'article' => $article]);
+        $selectTag = ArticleTags::where('article_id',$id)->get()->toArray();
+        foreach ($selectTag as $v){
+            $ids[] = $v['tag_id'];
+        }
+        $selectTag = implode(',',$ids);
+        return view('backend.article.update', ['category' => $category, 'tag' => $tags , 'article' => $article,'seletTag' => $selectTag]);
     }
 
 
