@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Home;
 use App\Models\Article;
 use App\Models\ArticleTags;
 use App\Models\Category;
+use App\Models\Config;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -14,10 +15,13 @@ use Illuminate\Support\Facades\DB;
 class IndexController extends Controller
 {
     protected $category = [];
+    protected $config = [];
     public function __construct()
     {
         $res = Category::orderBy('id')->get()->toArray();
         $this->category = \IchenkunFun::unlimitedForLayer($res);
+        $result = Config::all()->toArray();
+        $this->config = Config::configToKV($result);
     }
 
     //
@@ -26,7 +30,7 @@ class IndexController extends Controller
         $article = Article::where('is_top',0)->with(['category'])->orderBy('created_at','DESC')->limit(10)->get();
         $top = Article::where('is_top' ,1)->get();
         $hotArticle = Article::orderBy('click','DESC')->limit(7)->get();
-        return view('home.index',['article' => $article,'category' => $this->category,'hot'=>$hotArticle,'top' => $top]);
+        return view('home.index',['article' => $article,'category' => $this->category,'hot'=>$hotArticle,'top' => $top,'config'=> $this->config]);
     }
 
     public function article(Request $request,$id)
@@ -61,7 +65,8 @@ class IndexController extends Controller
             'category' => $this->category,
             'tag'=>$tag,
             'prev' => $prev,
-            'next' => $next
+            'next' => $next,
+            'config'=> $this->config
         ]);
     }
 
@@ -74,7 +79,8 @@ class IndexController extends Controller
         return view('home.category',[
             'category' => $this->category,
             'cat' => $category,
-            'articles' => $articles
+            'articles' => $articles,
+            'config'=> $this->config
         ]);
     }
 
@@ -83,7 +89,8 @@ class IndexController extends Controller
         $articles = Article::orderBy('created_at','DESC')->paginate(8);
         return view('home.allArticle',[
             'category' => $this->category,
-            'article' => $articles
+            'article' => $articles,
+            'config'=> $this->config
         ]);
     }
 

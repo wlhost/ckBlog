@@ -1,7 +1,8 @@
 @extends('home.layouts.home')
 
-@section('title','陈坤')
-
+@section('title',  $cat['name']  . ' ' . $config['connection'] . ' ' . $config['sitename'])
+@section('description', $cat['description'] or $config['description'])
+@section('keywords', $cat['keywords'] or $config['keywords'])
 
 @section('main')
     <!-- PAGE TITLE -->

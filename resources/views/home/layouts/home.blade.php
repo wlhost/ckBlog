@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
 
-<!-- source http://www.scnoob.com More templates http://www.scnoob.com/moban.html -->
+
 <head>
     <title>@yield('title')</title>
     <!-- META TAGS -->
@@ -38,7 +38,7 @@
                     <!-- LOGO -->
                     <div id="eskimo-logo-cell" class="w-100">
                         <a class="eskimo-logo-link" href="/">
-                            <img src="{{ URL::asset('home/images/logo.png') }}" class="eskimo-logo" alt="eskimo" />
+                            <img src="{{ $config['logo'] }}" class="eskimo-logo" alt="eskimo" />
                         </a>
                     </div>
                     <!-- MENU CONTAINER -->
@@ -143,7 +143,7 @@
             <!-- AUTHOR BOX -->
             <div class="eskimo-author-box eskimo-widget">
                 <div class="eskimo-author-img">
-                    <img src="http://eskimo.egemenerd.com/wp-content/uploads/2018/05/img.jpg" alt="JOHN DOE" />
+                    <img src="{{ URL('home/images/img.jpg') }}" alt="JOHN DOE" />
                 </div>
                 <h3><span>JOHN DOE</span></h3>
                 <p class="eskimo-author-subtitle">WEB DESIGNER &amp; DEVELOPER</p>
@@ -281,5 +281,4 @@
 </body>
 
 
-<!-- source http://www.scnoob.com More templates http://www.scnoob.com/moban.html -->
 </html>

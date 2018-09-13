@@ -1,7 +1,8 @@
 @extends('home.layouts.home')
 
-@section('title','陈坤')
-
+@section('title', $config['sitename'] . ' ' . $config['connection'] . ' ' . $config['sitename2'])
+@section('description', $config['description'])
+@section('keywords', $config['keywords'])
 
 @section('main')
     <div class="eskimo-page-title">
