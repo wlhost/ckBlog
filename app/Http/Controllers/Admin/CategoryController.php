@@ -43,6 +43,7 @@ class CategoryController extends Controller
         if ($request->isMethod('post')) {
             $request->validate([
                 'name' => 'required|unique:ck_categories|max:255',
+                'alias' => 'required|max:255',
                 'pid' => 'required|integer|max:255',
                 'sort' => 'required|unique:ck_categories|integer|between:0,255',
                 'keywords' => 'required',
@@ -51,6 +52,7 @@ class CategoryController extends Controller
             Category::create([
                 'name' => $request['name'],
                 'pid' => $request['pid'],
+                'alias' => $request['alias'],
                 'sort' => $request['sort'],
                 'keywords' => $request['keywords'],
                 'description' => $request['description'],

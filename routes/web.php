@@ -14,6 +14,10 @@
 
 
 Route::get('/', '\App\Http\Controllers\Home\IndexController@index');
+Route::get('/article{id}', '\App\Http\Controllers\Home\IndexController@article');
+
+
+Route::get('/test', '\App\Http\Controllers\Home\IndexController@test');
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['admin.auth']], function () {
     Route::get('/', 'AdminController@index');
@@ -42,17 +46,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['adm
         Route::post('update', 'ArticleController@update');
         Route::get('delete', 'ArticleController@delete');
 
-    });
-
-    /********* 导航 ***********/
-    Route::group(['prefix' => 'nav'],function() {
-        Route::get('index', 'NavController@index');
-        Route::get('jsonNav', 'NavController@jsonNav');
-        Route::get('store', 'NavController@store');
-        Route::post('store', 'NavController@store');
-        Route::get('update/{id}', 'NavController@update');
-        Route::post('update', 'NavController@update');
-        Route::get('delete', 'NavController@delete');
     });
 
     /********* 分类 ***********/

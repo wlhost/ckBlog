@@ -107,7 +107,6 @@
                         <dl class="layui-nav-child">
                             <dd data-name="list"><a lay-href="{{ url('admin/article/store') }}">发布文章</a></dd>
                             <dd data-name="list"><a lay-href="{{ url('admin/article/index') }}">文章列表</a></dd>
-                            <dd data-name="comment"><a lay-href="{{ url('admin/nav/index') }}">导航管理</a></dd>
                             <dd data-name="tags"><a lay-href="{{ url('admin/category/index') }}">分类管理</a></dd>
                             <dd data-name="comment"><a lay-href="{{ url('admin/comment') }}">评论管理</a></dd>
                             <dd data-name="comment"><a lay-href="{{ url('admin/tag/index') }}">标签管理</a></dd>

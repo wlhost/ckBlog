@@ -60,7 +60,6 @@
         <div class="layui-card-body">
             <div style="padding-bottom: 10px;">
                 <button class="layui-btn layuiadmin-btn-list" data-type="batchdel">删除</button>
-                <button class="layui-btn layuiadmin-btn-list" data-type="add">添加</button>
             </div>
             <table id="LAY-app-content-list" lay-filter="LAY-app-content-list"></table>
 

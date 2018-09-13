@@ -86,6 +86,9 @@
             }, {
                 field: "pid",
                 title: "上级分类"
+            }, {
+                field: "alias",
+                title: "别名"
             },{
                 field: "keywords",
                 title: "关键字"
@@ -155,7 +158,7 @@
                 title: "编辑分类",
                 content:"update/" + e.id,
                 maxmin: !0,
-                area: ["550px", "550px"],
+                area: ['430px', '550px'],
                 btn: ["确定", "取消"],
                 yes: function (e, i) {
                     //点击确认触发 iframe 内容中的按钮提交

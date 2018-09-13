@@ -40,6 +40,14 @@
     </div>
 
     <div class="layui-form-item">
+        <label class="layui-form-label">别名</label>
+        <div class="layui-input-inline">
+            <input type="text" name="alias" lay-verify="required" placeholder="请输入别名" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
         <label class="layui-form-label">关键字</label>
         <div class="layui-input-inline">
             <textarea type="text" name="keywords" lay-verify="required" placeholder="请输入关键字" autocomplete="off" class="layui-textarea"></textarea>
@@ -111,10 +119,7 @@
                         for ( var item in json) {
                             for ( var i = 0; i < json[item].length; i++) {
                                 layer.msg(json[item][i],function () {
-                                    var index=parent.layer.getFrameIndex(window.name);
-                                    parent.layer.close(index);
-                                    parent.layui.table.reload('LAY-app-content-list'); //重载表格
-                                    parent.layer.close(index); //再执行关闭
+                                    layer.closeAll('loading');
                                 });
                             }
                         }

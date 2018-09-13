@@ -36,6 +36,14 @@
         </div>
     </div>
 
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">别名</label>
+        <div class="layui-input-inline">
+            <input type="text" name="alias" lay-verify="required" value="{{ $category['alias'] }}" placeholder="请输入别名" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
     <div class="layui-form-item">
         <label class="layui-form-label">关键字</label>
         <div class="layui-input-inline">

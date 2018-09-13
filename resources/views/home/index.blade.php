@@ -45,29 +45,17 @@
                         <!-- MENU -->
                         <nav id="eskimo-main-menu" class="menu-main-menu-container">
                             <ul class="eskimo-menu-ul">
-                                <li><a href="#">Home</a>
+                                @foreach($category as $item)
+                                <li><a href="/category/{{ $item['alias'] }}">{{ $item['name'] }}</a>
                                     <ul class="sub-menu">
-                                        <li><a href="index.html">Demo 1</a></li>
-                                        <li><a href="index2.html">Demo 2</a></li>
-                                        <li><a href="index3.html">Demo 3</a></li>
+                                        @foreach($category as $item)
+                                            @if($item['id'] = $item['pid'])
+                                            <li><a href="/category/{{ $item['alias'] }}">{{ $item['name'] }}</a></li>
+                                            @endif
+                                        @endforeach
                                     </ul>
                                 </li>
-                                <li><a href="#">About Me</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="about.html">Demo 1</a></li>
-                                        <li><a href="about-2.html">Demo 2</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#">Blog</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="blog.html">Full Width</a></li>
-                                        <li><a href="blog-2-column.html">2 Column</a></li>
-                                        <li><a href="blog-3-column.html">3 Column</a></li>
-                                        <li><a href="single-post.html">Single Post</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="galleries.html">Galleries</a></li>
-                                <li><a href="other-features.html">Other Features</a></li>
+                                @endforeach
                             </ul>
                         </nav>
                     </div>
@@ -104,26 +92,31 @@
                 <div class="card-body">
                     <div class="card-horizontal-left">
                         <div class="card-category">
-                            <a href="category.html">{{ $item['category_id'] }}</a> </div>
-                        <h3 class="card-title"><a href="single-post.html">{{ $item['title'] }}</a></h3>
+                            @foreach($category as $ca)
+                                @if($ca['id'] = $item['category_id'])
+                            <a href="/category{{ $ca['alias'] }}">{{ $ca['name'] }}</a>
+                                @endif
+                            @endforeach
+                        </div>
+                        <h3 class="card-title"><a href="/article{{ $item['id'] }}">{{ $item['title'] }}</a></h3>
                         <div class="card-excerpt">
                             <p>{{ $item['description'] }}</p>
                         </div>
                         <div class="card-horizontal-meta">
                             <div class="eskimo-author-meta">
-                                By <a class="author-meta" href="author.html">{{ $item['author'] }}</a>
+                                By <a class="author-meta" href="#">{{ $item['author'] }}</a>
                             </div>
                             <div class="eskimo-date-meta">
-                                <a href="single-post.html">{{ $item['created_at'] }}</a>
+                                <a href="/article{{ $item['id'] }}">{{ $item['created_at'] }}</a>
                             </div>
                             <div class="eskimo-reading-meta">3 min read</div>
                         </div>
                     </div>
                     @if(isset($item['cover']))
                     <div class="card-horizontal-right" data-img="{{ $item['cover'] }}">
-                        <a class="card-featured-img" href="single-post.html"></a>
+                        <a class="card-featured-img" href="/article{{ $item['id'] }}"></a>
                     </div>
-                        @endif
+                    @endif
                 </div>
             </div>
             @endforeach
@@ -139,7 +132,7 @@
 
             <!-- CAROUSEL -->
             <div class="eskimo-widget-title">
-                <h3 class="eskimo-carousel-title"><span>点击排行!</span></h3>
+                <h3 class="eskimo-carousel-title"><span>点击排行</span></h3>
             </div>
 
             <div class="eskimo-carousel-container">

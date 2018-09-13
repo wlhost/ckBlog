@@ -94,7 +94,7 @@ class ArticleController extends Controller
             ]);
         }
 
-        $category = Category::where('pid', 0)->get();
+        $category = Category::all();
         $tags = Tag::all();
         return view('backend.article.store', ['category' => $category, 'tag' => $tags]);
     }

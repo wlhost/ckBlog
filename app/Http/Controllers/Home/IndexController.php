@@ -15,6 +15,20 @@ class IndexController extends Controller
     {
         $article = Article::all();
         $category = Category::all();
-        return view('home.index',['article' => $article]);
+        return view('home.index',['article' => $article,'category' => $category]);
     }
+
+    public function article(Request $request,$id)
+    {
+        $article = Article::find($id)->get();
+        return view('home.article',['article' => $article]);
+    }
+
+    public function  test()
+    {
+        $article = Article::all();
+        $category = Category::all();
+        return view('home.tindex',['article' => $article,'category' => $category]);
+    }
+
 }

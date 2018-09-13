@@ -41,7 +41,12 @@
                             <select name="category_id" lay-verify="required" lay-search="">
                                 <option value="">直接选择或搜索选择</option>
                                 @foreach($category as $item)
-                                <option value="{{$item['id']}}">{{$item['name']}}</option>
+                                    @if($item['pid'] != 0)
+                                        <option value="{{$item['id']}}">--- {{$item['name']}}</option>
+                                    @else
+                                        <option value="{{$item['id']}}">{{$item['name']}}</option>
+                                    @endif
+
                                 @endforeach
                             </select>
                         </div>
@@ -54,7 +59,7 @@
                     <div class="layui-input-block">
                         <select name="tags" xm-select="select7_1" xm-select-search="" xm-select-create="">
                             @foreach($tag as $item)
-                                <option value="{{$item['id']}}">{{$item['name']}}</option>
+                                    <option value="{{$item['id']}}">{{$item['name']}}</option>
                             @endforeach
                         </select>
                     </div>

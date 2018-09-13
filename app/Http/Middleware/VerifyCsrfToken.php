@@ -13,7 +13,8 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         //
-        '/admin/admin/editorMd'
+        '/admin/admin/editorMd',
+        '/hook/github'
 
     ];
 }
