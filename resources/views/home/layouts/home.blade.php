@@ -121,6 +121,17 @@
                     </form>
                 </div>
             </div>
+
+            <div class="row eskimo-footer-wrapper">
+                <!-- FOOTER WIDGET 1 -->
+                <div class="col-12 col-lg-12 mb-4 mb-lg-0">
+                    <h5 class="eskimo-title-with-border"><span>友情链接</span></h5>
+                    <a href="https://console.upyun.com/register/?invite=SJfUvOmwQ" target="_blank"><img style="max-width: 80px;" src="{{ URL('home/images/upyun.png') }}" alt=""></a>
+
+                </div>
+
+            </div>
+
             <!-- CREDITS -->
             <div class="eskimo-footer-credits">
                 <p>
