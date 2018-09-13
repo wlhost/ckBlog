@@ -41,12 +41,7 @@
                             <select name="category_id" lay-verify="required" lay-search="">
                                 <option value="">直接选择或搜索选择</option>
                                 @foreach($category as $item)
-                                    @if($item['pid'] != 0)
-                                        <option value="{{$item['id']}}">--- {{$item['name']}}</option>
-                                    @else
-                                        <option value="{{$item['id']}}">{{$item['name']}}</option>
-                                    @endif
-
+                                        <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
                                 @endforeach
                             </select>
                         </div>

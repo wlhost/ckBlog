@@ -42,7 +42,7 @@
                             <select name="category_id" lay-verify="required" lay-search="">
                                 <option value="">直接选择或搜索选择</option>
                                 @foreach($category as $item)
-                                <option value="{{$item['id']}}">{{$item['name']}}</option>
+                                    <option value="{{$item['id']}}">{{$item['name']}}</option>
                                 @endforeach
                             </select>
                         </div>

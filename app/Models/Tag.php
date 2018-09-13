@@ -13,5 +13,14 @@ class Tag extends Base
     protected $fillable = ['name'];
 
 
+    /**
+     * 关联文章表
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function articles()
+    {
+        return $this->belongsToMany(Article::class, 'ck_article_tags');
+    }
 
 }

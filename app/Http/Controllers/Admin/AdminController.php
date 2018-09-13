@@ -141,7 +141,7 @@ class AdminController extends Controller
         $path = $img->store(date('Ymd'));
         return response()->json([
             'code' => 0,
-            'url'=>'uploads/'.$path
+            'url'=>'/uploads/'.$path
         ]);
     }
 

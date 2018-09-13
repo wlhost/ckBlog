@@ -13,11 +13,14 @@
 
 
 
-Route::get('/', '\App\Http\Controllers\Home\IndexController@index');
-Route::get('/article{id}', '\App\Http\Controllers\Home\IndexController@article');
-
-
 Route::get('/test', '\App\Http\Controllers\Home\IndexController@test');
+
+Route::get('/', '\App\Http\Controllers\Home\IndexController@index');
+Route::get('/article/{id}', '\App\Http\Controllers\Home\IndexController@article');
+Route::get('/category/{alias}', '\App\Http\Controllers\Home\IndexController@category');
+Route::get('/all', '\App\Http\Controllers\Home\IndexController@all');
+
+
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['admin.auth']], function () {
     Route::get('/', 'AdminController@index');
@@ -74,6 +77,12 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['adm
     Route::get('comment', 'CommentController@index');
     Route::get('commentAdd', 'CommentController@commentAdd');
     Route::post('commentAdd', 'CommentController@commentAdd');
+
+
+    Route::group(['prefix' => 'website'],function() {
+        Route::get('index', 'WebSiteController@index');
+        Route::post('store', 'WebSiteController@store');
+    });
 
 
 

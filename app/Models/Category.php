@@ -13,9 +13,12 @@ class Category extends Base
     protected $fillable = ['name', 'sort','alias','pid','description','keywords'];
 
 
-    // 分类下的文章
-    public function article()
+    /**
+     * 一对多关联文章
+     */
+    public function articles()
     {
-        return $this->hasMany('App\Models\Article','category_id');
+        return $this->hasMany(Article::class);
     }
+
 }

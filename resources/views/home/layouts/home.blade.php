@@ -37,7 +37,7 @@
                 <div id="eskimo-sidebar-wrapper" class="d-flex align-items-start flex-column h-100 w-100">
                     <!-- LOGO -->
                     <div id="eskimo-logo-cell" class="w-100">
-                        <a class="eskimo-logo-link" href="index.html">
+                        <a class="eskimo-logo-link" href="/">
                             <img src="{{ URL::asset('home/images/logo.png') }}" class="eskimo-logo" alt="eskimo" />
                         </a>
                     </div>
@@ -50,13 +50,13 @@
                             <ul class="eskimo-menu-ul">
                                 @foreach($category as $item)
                                     <li><a href="/category/{{ $item['alias'] }}">{{ $item['name'] }}</a>
+                                        @if(count($item['child']) > 0)
                                         <ul class="sub-menu">
-                                            @foreach($category as $item)
-                                                @if($item['id'] = $item['pid'])
-                                                    <li><a href="/category/{{ $item['alias'] }}">{{ $item['name'] }}</a></li>
-                                                @endif
-                                            @endforeach
+                                            @foreach($item['child'] as $v)
+                                            <li><a href="/category/{{ $v['alias'] }}">{{ $v['name'] }}</a></li>
+                                                @endforeach
                                         </ul>
+                                            @endif
                                     </li>
                                 @endforeach
                             </ul>
@@ -66,11 +66,9 @@
                     <div id="eskimo-social-cell" class="mt-auto w-100">
                         <div id="eskimo-social-inner">
                             <ul class="eskimo-social-icons">
-                                <li><a href="#"><i class="fa fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                                <li><a href="#"><i class="fa fa-vimeo"></i></a></li>
+                                <li><a href="#"><i class="fa fa-weibo"></i></a></li>
+                                <li><a href="#"><i class="fa fa-wechat"></i></a></li>
+                                <li><a href="#"><i class="fa fa-qq"></i></a></li>
                             </ul>
                             <div class="clearfix"></div>
                         </div>
@@ -95,7 +93,7 @@
             <!-- 正文开始   -->
 
             @section('main')
-                @show
+            @show
 
         </div>
     </main>
@@ -126,7 +124,7 @@
             <!-- CREDITS -->
             <div class="eskimo-footer-credits">
                 <p>
-                    Made with love by Egemenerd More Templates <a href="http://www.scnoob.com">菜鸟素材</a> - Collect from <a href="http://www.scnoob.com/moban.html">网页模板</a>
+                    Power By Ichenkun
                 </p>
             </div>
         </div>

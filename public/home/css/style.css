@@ -1955,9 +1955,9 @@ textarea.form-control {
     padding: 0;
 }
 
-.pagination > .page-item > .dots,
-.pagination > .page-item > .page-link,
-.pagination > .page-item > span {
+
+.pagination > li > span,
+.pagination > li > a{
     background-color: transparent;
     border: 2px solid #333;
     border-radius: 20px;
@@ -1978,28 +1978,19 @@ textarea.form-control {
     font-size: 1rem;
 }
 
-.pagination > .page-item > a:hover,
-.pagination > .page-item > a:focus,
-.pagination > .page-item > a:active {
+
+.pagination > li.active > span,
+.pagination > li > a:hover
+{
     background-color: #333;
     border-color: #333;
     color: #FFFFFF;
 }
 
-.pagination > .page-item.active .page-link {
-    background-color: #333;
-    color: #fff;
-    border-color: #333;
-    pointer-events: none;
-}
 
-.eskimo-pager .fa-chevron-right {
-    margin-left: 2px;
-}
 
-.eskimo-pager .fa-chevron-left {
-    margin-right: 2px;
-}
+
+
 
 /* ================= RESPONSIVE IFRAME ================== */
 

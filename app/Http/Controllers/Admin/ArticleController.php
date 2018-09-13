@@ -148,7 +148,7 @@ class ArticleController extends Controller
         }
 
         $article = Article::where('id',$id)->first();
-        $category = Category::where('pid', 0)->get();
+        $category = Category::all();
         $tags = Tag::all();
         return view('backend.article.update', ['category' => $category, 'tag' => $tags , 'article' => $article]);
     }
