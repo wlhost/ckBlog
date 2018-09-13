@@ -12,10 +12,8 @@
                 <div class="card-horizontal-left">
                     <div class="card-category">
                         @foreach($category as $vs)
-                            @if($vs['id'] = $v['category_id'])
-                                <a href="/category/{{ $vs['alias'] }}">
-                                    {{ $vs['name'] }}
-                                </a>
+                            @if($vs['id'] == $v['category_id'])
+                                {{ $vs['name'] }}
                             @endif
                         @endforeach
                     </div>
@@ -48,10 +46,8 @@
                 <div class="card-horizontal-left">
                     <div class="card-category">
                         @foreach($category as $vs)
-                            @if($vs['id'] = $v['category_id'])
-                                <a href="/category/{{ $vs['alias'] }}">
+                            @if($vs['id'] == $v['category_id'])
                                 {{ $vs['name'] }}
-                                </a>
                             @endif
                         @endforeach
                     </div>
