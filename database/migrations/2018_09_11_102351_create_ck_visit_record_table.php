@@ -21,7 +21,6 @@ class CreateCkVisitRecordTable extends Migration
             $table->string('ip');
             $table->string('url');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

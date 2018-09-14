@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Models\Admin;
+use App\Models\Article;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -14,13 +15,17 @@ class AdminController extends Controller
     // 后台首页
     public function index()
     {
+
         return view('backend.index');
     }
 
     // 后台首页控制台
     public function console()
     {
-        return view('backend.home.console');
+        $count = Article::all()->count();
+        return view('backend.home.console',[
+            'count' => $count,
+        ]);
     }
 
     // 分类页面
