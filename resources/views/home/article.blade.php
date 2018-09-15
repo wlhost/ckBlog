@@ -20,7 +20,10 @@
     </div>
     <!-- POST CONTENT -->
     <div class="eskimo-page-content">
-        {!! $article['html']  !!}
+
+        <div id="markdown">
+                <textarea id="append-test" style="display:none;">{{ $article['markdown'] }}</textarea>
+        </div>
 
         <div class="clearfix"></div>
         <!-- TAGS -->
@@ -202,3 +205,34 @@
         {{--</form>--}}
     {{--</div>--}}
     @endsection
+
+
+@section('js')
+    <script src="{{ URL::asset('backend/lib//editormd/marked.min.js') }}"></script>
+    <script src="{{ URL::asset('backend/lib//editormd/prettify.min.js') }}"></script>
+    <script src="{{ URL::asset('backend/lib//editormd/raphael.min.js') }}"></script>
+    <script src="{{ URL::asset('backend/lib//editormd/underscore.min.js') }}"></script>
+    <script src="{{ URL::asset('backend/lib//editormd/sequence-diagram.min.js') }}"></script>
+    <script src="{{ URL::asset('backend/lib//editormd/flowchart.min.js') }}"></script>
+    <script src="{{ URL::asset('backend/lib//editormd/jquery.flowchart.min.js') }}"></script>
+    <script src="{{ URL::asset('backend/lib//editormd/editormd.min.js') }}"></script>
+
+
+
+    <script>
+        $(function() {
+            var EditormdView;
+
+
+            EditormdView = editormd.markdownToHTML("markdown", {
+                htmlDecode      : "style,script,iframe",  // you can filter tags decode
+                emoji           : true,
+                taskList        : true,
+                tex             : true,  // 默认不解析
+                flowChart       : true,  // 默认不解析
+                sequenceDiagram : true,  // 默认不解析
+            });
+        });
+
+    </script>
+@endsection

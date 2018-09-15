@@ -16,6 +16,7 @@
     <link href="{{ URL::asset('home/css/style.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ URL::asset('home/css/rrssb.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ URL::asset('home/css/featherlight.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ URL::asset('home/css/editormd.preview.css') }}" rel="stylesheet" type="text/css">
 
     @yield('css')
 </head>
@@ -289,6 +290,8 @@
         });
     })(jQuery);
 </script>
+
+@yield('js')
 </body>
 
 
