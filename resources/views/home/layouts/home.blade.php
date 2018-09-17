@@ -69,7 +69,7 @@
                             <ul class="eskimo-social-icons">
                                 <li><a href="#"><i class="fa fa-weibo"></i></a></li>
                                 <li><a href="#"><i class="fa fa-wechat"></i></a></li>
-                                <li><a href="#"><i class="fa fa-qq"></i></a></li>
+                                <li><a href="//shang.qq.com/wpa/qunwpa?idkey=78159bc3bce11087147e55a77a978c5e7a9e0df54f804e9fa1eff9ce3ecdd5cd"><i class="fa fa-qq"></i></a></li>
                             </ul>
                             <div class="clearfix"></div>
                         </div>
